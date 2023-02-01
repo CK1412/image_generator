@@ -7,4 +7,9 @@ class AppTextStyles {
     fontWeight: FontWeight.w400,
     fontSize: 14,
   );
+
+  static const textMedium20 = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 20,
+  );
 }
