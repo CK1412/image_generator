@@ -23,7 +23,7 @@ class _SidebarLeftState extends State<SidebarLeft> {
             child: OutlinedButton.icon(
               onPressed: () {},
               icon: const Icon(Icons.add),
-              label: const Text(AppTexts.createNewImage),
+              label: const Text(AppTexts.btn1),
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size.fromHeight(50),
                 foregroundColor: AppColors.white,

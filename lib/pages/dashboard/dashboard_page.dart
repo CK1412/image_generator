@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../constants/resources/colors.dart';
 
+import '../../constants/resources/colors.dart';
 import 'widgets/dashboard_header.dart';
 import 'widgets/input_data_card.dart';
 import 'widgets/output_image_card.dart';

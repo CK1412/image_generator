@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'constants/resources/colors.dart';
 
+import 'constants/resources/colors.dart';
 import 'pages/dashboard/dashboard_page.dart';
 import 'widgets/side_bar_left.dart';
 
