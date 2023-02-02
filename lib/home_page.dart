@@ -14,10 +14,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.bgSidebarLeft,
-      body: SafeArea(
-        child: Row(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.bgSidebarLeft,
+        body: Row(
           children: const [
             Expanded(
               child: SidebarLeft(),
