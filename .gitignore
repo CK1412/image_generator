@@ -47,3 +47,7 @@ app.*.map.json
 
 **/*.freezed.dart
 **/*.g.dart
+
+/linux/
+/macos/
+/windows/
