@@ -19,7 +19,7 @@ class _OutputImageCardState extends ConsumerState<OutputImageCard> {
   Widget build(BuildContext context) {
     final dashboardState = ref.watch(dashboardViewModelProvider);
 
-    final imageUrl = dashboardState.currentImageUrl;
+    final imageUrl = dashboardState.imageUrl;
 
     return Container(
       margin: const EdgeInsets.all(8.0),

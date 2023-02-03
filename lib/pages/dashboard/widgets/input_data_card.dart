@@ -1,32 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_generator/pages/dashboard/dashboard_view_model.dart';
 
 import '../../../constants/app_texts.dart';
 import '../../../constants/resources/colors.dart';
 import '../../../constants/resources/text_styles.dart';
+import 'custom_filled_button.dart';
 
-class InputDataCard extends StatefulWidget {
+class InputDataCard extends ConsumerStatefulWidget {
   const InputDataCard({super.key});
 
   @override
-  State createState() => _InputDataCardState();
+  ConsumerState createState() => _InputDataCardState();
 }
 
-class _InputDataCardState extends State<InputDataCard> {
-  late TextEditingController _textController;
-
-  bool isSaveBtnActive = false;
-  bool isGenerateBtnActive = false;
-  bool isClearAllBtnActive = false;
+class _InputDataCardState extends ConsumerState<InputDataCard> {
+  final _textController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _textController = TextEditingController();
     _textController.addListener(() {
-      setState(() {
-        isGenerateBtnActive = _textController.text.isNotEmpty;
-        isClearAllBtnActive = _textController.text.isNotEmpty;
-      });
+      final value = _textController.text;
+
+      ref.read(dashboardViewModelProvider.notifier).setInputText(value);
+      ref
+          .read(dashboardViewModelProvider.notifier)
+          .setsIsGenerateBtnActive(value.isNotEmpty);
+      ref
+          .read(dashboardViewModelProvider.notifier)
+          .setsIsClearAllBtnActive(value.isNotEmpty);
     });
   }
 
@@ -38,6 +41,12 @@ class _InputDataCardState extends State<InputDataCard> {
 
   @override
   Widget build(BuildContext context) {
+    final dashboardState = ref.watch(dashboardViewModelProvider);
+
+    final isClearAllBtnActive = dashboardState.isClearAllBtnActive;
+    final isGenerateBtnActive = dashboardState.isGenerateBtnActive;
+    final isSaveBtnActive = dashboardState.isSaveBtnActive;
+
     return Container(
       margin: const EdgeInsets.all(8.0),
       padding: const EdgeInsets.all(12.0),
@@ -106,17 +115,22 @@ class _InputDataCardState extends State<InputDataCard> {
               const Spacer(),
             ],
           ),
+          Expanded(
+            child:
+                Text(ref.watch(dashboardViewModelProvider).inputText ?? 'null'),
+          )
         ],
       ),
     );
   }
 
-  void _generateImage() {
+  Future<void> _generateImage() async {
+    await ref.read(dashboardViewModelProvider.notifier).generateImage();
+
     // TODO
-    if (!isSaveBtnActive) {
-      setState(() {
-        isSaveBtnActive = true;
-      });
+
+    if (!ref.watch(dashboardViewModelProvider).isSaveBtnActive) {
+      ref.read(dashboardViewModelProvider.notifier).setsIsSaveBtnActive(true);
     }
   }
 
@@ -126,35 +140,6 @@ class _InputDataCardState extends State<InputDataCard> {
 
   void _saveToList() {
     // TODO
-    setState(() {
-      isSaveBtnActive = false;
-    });
-  }
-}
-
-class CustomFilledButton extends StatelessWidget {
-  const CustomFilledButton({
-    super.key,
-    required this.isActive,
-    required this.title,
-    required this.onPressed,
-  });
-
-  final bool isActive;
-  final String title;
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return IgnorePointer(
-      ignoring: !isActive,
-      child: FilledButton(
-        onPressed: onPressed,
-        style: FilledButton.styleFrom(
-          backgroundColor: isActive ? null : AppColors.grey,
-        ),
-        child: Text(title),
-      ),
-    );
+    ref.read(dashboardViewModelProvider.notifier).setsIsSaveBtnActive(false);
   }
 }

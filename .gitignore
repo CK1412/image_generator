@@ -51,3 +51,5 @@ app.*.map.json
 /linux/
 /macos/
 /windows/
+
+*.env
