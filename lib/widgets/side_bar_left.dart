@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../constants/app_texts.dart';
 import '../constants/resources/colors.dart';
 import 'drawer_list_tile.dart';
 
@@ -22,7 +23,7 @@ class _SidebarLeftState extends State<SidebarLeft> {
             child: OutlinedButton.icon(
               onPressed: () {},
               icon: const Icon(Icons.add),
-              label: const Text('Create new image'),
+              label: const Text(AppTexts.btn1),
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size.fromHeight(50),
                 foregroundColor: AppColors.white,

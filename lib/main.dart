@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'constants/resources/colors.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'constants/resources/colors.dart';
 import 'home_page.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+    const ProviderScope(
+      child: MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -14,9 +19,13 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'image generator',
-      theme: ThemeData.dark(
+      theme: ThemeData.light(
         useMaterial3: true,
       ).copyWith(
+        primaryColor: AppColors.green,
+        colorScheme: const ColorScheme.light().copyWith(
+          primary: AppColors.green,
+        ),
         drawerTheme: const DrawerThemeData(
           backgroundColor: AppColors.bgSidebarLeft,
         ),
