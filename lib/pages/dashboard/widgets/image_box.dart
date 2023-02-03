@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,7 +18,7 @@ class ImageBox extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final dashboardState = ref.watch(dashboardViewModelProvider);
 
-    final imageUrl = dashboardState.currentImageUrl;
+    final imageUrl = dashboardState.imageUrl;
 
     return Container(
       constraints: const BoxConstraints(
@@ -39,7 +38,7 @@ class ImageBox extends ConsumerWidget {
             : CachedNetworkImage(
                 imageUrl: imageUrl,
                 fit: BoxFit.contain,
-                progressIndicatorBuilder: (context, url, progress) {
+                placeholder: (context, url) {
                   return Center(
                     child: Lottie.asset(AppAnimations.lottieLoading),
                   );
