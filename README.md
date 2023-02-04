@@ -24,4 +24,6 @@ https://github.com/CK1412/image_generator
 API_KEY=[YOUR_API]   
 ```
 
-- Run on Chrome: `flutter run -d chrome --web-renderer html`
+- Run on Chrome: 
+    - Run command: `flutter run -d chrome --web-renderer html`.
+    - Or run it manually, we need to set **Dart: Flutter Web Render** to **html** in VSCode Settings.
