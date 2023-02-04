@@ -19,6 +19,7 @@ class ImageBox extends ConsumerWidget {
     final dashboardState = ref.watch(dashboardViewModelProvider);
 
     final imageUrl = dashboardState.imageUrl;
+    final isGeneratingImage = dashboardState.isGeneratingImage;
 
     return Container(
       constraints: const BoxConstraints(
@@ -27,28 +28,34 @@ class ImageBox extends ConsumerWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
-        color: imageUrl != null ? AppColors.lightGrey : null,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12.0),
-        child: imageUrl == null
-            ? Center(
-                child: SvgPicture.asset(AppIcons.svgPicture),
-              )
-            : CachedNetworkImage(
-                imageUrl: imageUrl,
-                fit: BoxFit.contain,
-                placeholder: (context, url) {
-                  return Center(
-                    child: Lottie.asset(AppAnimations.lottieLoading),
-                  );
-                },
-                errorWidget: (context, url, error) {
-                  return Center(
-                    child: Lottie.asset(AppAnimations.lottieFailed),
-                  );
-                },
-              ),
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          child: isGeneratingImage
+              ? Center(
+                  child: Lottie.asset(AppAnimations.lottieLoading),
+                )
+              : imageUrl == null
+                  ? Center(
+                      child: SvgPicture.asset(AppIcons.svgPicture),
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: imageUrl,
+                      fit: BoxFit.contain,
+                      placeholder: (context, url) {
+                        return Container(
+                          color: AppColors.bgDashboard,
+                        );
+                      },
+                      errorWidget: (context, url, error) {
+                        return Center(
+                          child: Lottie.asset(AppAnimations.lottieFailed),
+                        );
+                      },
+                    ),
+        ),
       ),
     );
   }

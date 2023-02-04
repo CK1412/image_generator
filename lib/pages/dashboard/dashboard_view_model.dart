@@ -1,11 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
-
-import 'dashboard_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../constants/constants.dart';
+import 'dashboard_state.dart';
 
 part 'dashboard_view_model.g.dart';
 
@@ -43,35 +42,47 @@ class DashboardViewModel extends _$DashboardViewModel {
     state = state.copyWith(imageUrl: value);
   }
 
+  void setIsGeneratingImage(bool value) {
+    state = state.copyWith(isGeneratingImage: value);
+  }
+
   Future<void> generateImage() async {
     if (state.inputText!.isEmpty) {
       return;
     }
 
+    setIsGeneratingImage(true);
+
+    await Future.delayed(const Duration(seconds: 2));
+
+    setImageUrl(Constants.image1);
+
     logger.d('Generating image...');
 
-    final response = await _apiClient.post(
-      Uri.parse(_baseUrl),
-      headers: {
-        'Authorization': 'Bearer $_apiKey',
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode({
-        'prompt': state.inputText,
-        'n': 1,
-        'size': '512x512',
-      }),
-    );
+    // final response = await _apiClient.post(
+    //   Uri.parse(_baseUrl),
+    //   headers: {
+    //     'Authorization': 'Bearer $_apiKey',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: jsonEncode({
+    //     'prompt': state.inputText,
+    //     'n': 1,
+    //     'size': '512x512',
+    //   }),
+    // );
 
-    if (response.statusCode == 200) {
-      final imageUrl = jsonDecode(response.body)['data'][0]['url'];
+    // if (response.statusCode == 200) {
+    //   final imageUrl = jsonDecode(response.body)['data'][0]['url'];
 
-      setImageUrl(imageUrl);
+    //   setImageUrl(imageUrl);
 
-      logger.i('Generate image successfully.');
-    } else {
-      setImageUrl('');
-      logger.e('Generate image failed.');
-    }
+    //   logger.i('Generate image successfully.');
+    // } else {
+    //   setImageUrl('');
+    //   logger.e('Generate image failed.');
+    // }
+
+    setIsGeneratingImage(false);
   }
 }
