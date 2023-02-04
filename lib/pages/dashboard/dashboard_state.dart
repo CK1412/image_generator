@@ -10,6 +10,7 @@ class DashboardState with _$DashboardState {
     @Default(false) bool isSaveBtnActive,
     @Default(false) bool isGenerateBtnActive,
     @Default(false) bool isClearAllBtnActive,
+    @Default(false) bool isGeneratingImage,
   }) = _DashboardState;
 
   factory DashboardState.init() => const DashboardState();

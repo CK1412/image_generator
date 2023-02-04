@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_generator/pages/dashboard/dashboard_view_model.dart';
 
 import '../../../constants/app_texts.dart';
 import '../../../constants/resources/colors.dart';
 import '../../../constants/resources/text_styles.dart';
+import '../dashboard_view_model.dart';
 import 'custom_filled_button.dart';
 
 class InputDataCard extends ConsumerStatefulWidget {

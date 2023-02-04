@@ -6,6 +6,8 @@ import 'constants/resources/colors.dart';
 import 'home_page.dart';
 
 Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await dotenv.load(fileName: '.env');
 
   runApp(
