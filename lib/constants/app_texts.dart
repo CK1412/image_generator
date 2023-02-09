@@ -16,6 +16,7 @@ class AppTexts {
   // Description
   static const description1 =
       'Note: The more detailed the description, the more optimal the image creation will be.';
+  static const description2 = 'Image is being created.';
 
   // Validate
   // static const validate1 = 'Content cannot be empty!';

@@ -3,24 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../constants/resources/colors.dart';
 import '../dashboard_view_model.dart';
+import 'control_button.dart';
 import 'image_box.dart';
 
-class OutputImageCard extends ConsumerStatefulWidget {
+class OutputImageCard extends StatelessWidget {
   const OutputImageCard({
     super.key,
   });
 
   @override
-  ConsumerState createState() => _OutputImageCardState();
-}
-
-class _OutputImageCardState extends ConsumerState<OutputImageCard> {
-  @override
   Widget build(BuildContext context) {
-    final dashboardState = ref.watch(dashboardViewModelProvider);
-
-    final imageUrl = dashboardState.imageUrl;
-
     return Container(
       margin: const EdgeInsets.all(8.0),
       padding: const EdgeInsets.all(12.0),
@@ -30,38 +22,51 @@ class _OutputImageCardState extends ConsumerState<OutputImageCard> {
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const ImageBox(),
-          Visibility(
-            visible: imageUrl != null,
-            child: Container(
-              margin: const EdgeInsets.only(top: 20),
-              constraints: const BoxConstraints(
-                maxWidth: 400,
-                maxHeight: 400,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  InkWell(
-                    onTap: _downloadImage,
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
-                        color: AppColors.lightGrey,
-                      ),
-                      child: const Icon(Icons.download_rounded),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
+        children: const [
+          ImageBox(),
+          ControlBox(),
         ],
       ),
     );
   }
+}
 
-  void _downloadImage() {}
+class ControlBox extends ConsumerStatefulWidget {
+  const ControlBox({super.key});
+
+  @override
+  ConsumerState createState() => _ControlBoxState();
+}
+
+class _ControlBoxState extends ConsumerState<ControlBox> {
+  @override
+  Widget build(BuildContext context) {
+    final dashboardState = ref.watch(dashboardViewModelProvider);
+
+    final imageUrl = dashboardState.imageUrl;
+
+    return Visibility(
+      visible: imageUrl != null,
+      child: Container(
+        margin: const EdgeInsets.only(top: 20),
+        constraints: const BoxConstraints(
+          maxWidth: 512,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            // Download button
+            ControlButton(
+              onTap: _downloadImage,
+              child: const Icon(Icons.download_rounded),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _downloadImage() async {
+    // TODO
+  }
 }
