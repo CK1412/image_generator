@@ -1,9 +1,9 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
+import '../../data/api/api_client.dart';
+import '../../data/providers/api_client_provider.dart';
+import '../../utils/extensions/string_extension.dart';
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../constants/constants.dart';
 import 'dashboard_state.dart';
 
 part 'dashboard_view_model.g.dart';
@@ -15,12 +15,9 @@ class DashboardViewModel extends _$DashboardViewModel {
     return DashboardState.init();
   }
 
-  final _apiClient = http.Client();
-
-  final _apiKey = dotenv.env['API_KEY'];
-  final _baseUrl = 'https://api.openai.com/v1/images/generations';
-
   final logger = Logger();
+
+  ApiClient get apiClient => ref.read(apiClientProvider);
 
   void setInputText(String? value) {
     state = state.copyWith(inputText: value);
@@ -47,41 +44,27 @@ class DashboardViewModel extends _$DashboardViewModel {
   }
 
   Future<void> generateImage() async {
-    if (state.inputText!.isEmpty) {
+    if (state.inputText.isNullOrEmpty) {
       return;
     }
 
     setIsGeneratingImage(true);
-
-    await Future.delayed(const Duration(seconds: 2));
-
-    setImageUrl(Constants.image1);
-
     logger.d('Generating image...');
 
-    // final response = await _apiClient.post(
-    //   Uri.parse(_baseUrl),
-    //   headers: {
-    //     'Authorization': 'Bearer $_apiKey',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: jsonEncode({
-    //     'prompt': state.inputText,
-    //     'n': 1,
-    //     'size': '512x512',
-    //   }),
-    // );
+    // await Future.delayed(const Duration(seconds: 2));
 
-    // if (response.statusCode == 200) {
-    //   final imageUrl = jsonDecode(response.body)['data'][0]['url'];
+    // setImageUrl(Constants.image1);
 
-    //   setImageUrl(imageUrl);
+    final imageUrl = await apiClient.createImage(
+      textDescription: state.inputText!,
+    );
 
-    //   logger.i('Generate image successfully.');
-    // } else {
-    //   setImageUrl('');
-    //   logger.e('Generate image failed.');
-    // }
+    if (imageUrl.isNotEmpty) {
+      setImageUrl(imageUrl);
+      logger.i('Generate image successfully.');
+    } else {
+      logger.e('Generate image failed.');
+    }
 
     setIsGeneratingImage(false);
   }
