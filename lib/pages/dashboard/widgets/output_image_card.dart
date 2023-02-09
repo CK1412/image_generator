@@ -67,18 +67,6 @@ class _ControlBoxState extends ConsumerState<ControlBox> {
   }
 
   Future<void> _downloadImage() async {
-    final dashboardState = ref.watch(dashboardViewModelProvider);
-
-    final imageUrl = dashboardState.imageUrl;
-
-    final imageName = dashboardState.imageName;
-
-    if (imageUrl == null) {
-      return;
-    }
-
-    await ref
-        .read(dashboardViewModelProvider.notifier)
-        .downloadImage(imageUrl, imageName!);
+    // TODO
   }
 }

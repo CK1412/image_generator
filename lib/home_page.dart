@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'pages/dashboard/dashboard_view_model.dart';
 
 import 'constants/resources/colors.dart';
 import 'pages/dashboard/dashboard_page.dart';
+import 'pages/dashboard/dashboard_view_model.dart';
 import 'widgets/side_bar_left.dart';
 
 class HomePage extends ConsumerWidget {
