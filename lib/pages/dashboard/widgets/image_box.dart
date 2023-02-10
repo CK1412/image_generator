@@ -21,58 +21,59 @@ class ImageBox extends ConsumerWidget {
     final imageUrl = dashboardState.imageUrl;
     final isGeneratingImage = dashboardState.isGeneratingImage;
 
-    return AspectRatio(
-      aspectRatio: 1 / 1,
-      child: Container(
-        constraints: const BoxConstraints(
-          maxWidth: 512,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.0),
-          // color: Colors.amber,
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(12.0),
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
-            child: isGeneratingImage
-                ? SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        FractionallySizedBox(
-                          widthFactor: 0.2,
-                          child: Lottie.asset(
-                            AppAnimations.lottieDrawingPencil,
-                          ),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12.0),
+        // color: Colors.amber,
+      ),
+      constraints: const BoxConstraints(
+        maxWidth: 512,
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: AspectRatio(
+        aspectRatio: 1 / 1,
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          child: isGeneratingImage
+              ? SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      FractionallySizedBox(
+                        widthFactor: 0.2,
+                        child: Lottie.asset(
+                          AppAnimations.lottieDrawingPencil,
+                          fit: BoxFit.cover,
                         ),
-                        const Text(
-                          AppTexts.description2,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  )
-                : imageUrl == null
-                    ? SvgPicture.asset(
-                        AppIcons.svgPicture,
-                      )
-                    : CachedNetworkImage(
-                        imageUrl: imageUrl,
-                        fit: BoxFit.cover,
-                        useOldImageOnUrlChange: true,
-                        placeholder: (context, url) {
-                          return Center(
-                            child: Lottie.asset(AppAnimations.lottieLoading),
-                          );
-                        },
-                        errorWidget: (context, url, error) {
-                          return Center(
-                            child: Lottie.asset(AppAnimations.lottieFailed),
-                          );
-                        },
                       ),
-          ),
+                      const Text(
+                        AppTexts.description2,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                )
+              : imageUrl == null
+                  ? SvgPicture.asset(
+                      AppIcons.svgPicture,
+                      fit: BoxFit.cover,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: imageUrl,
+                      fit: BoxFit.cover,
+                      useOldImageOnUrlChange: true,
+                      filterQuality: FilterQuality.high,
+                      placeholder: (context, url) {
+                        return Center(
+                          child: Lottie.asset(AppAnimations.lottieLoading),
+                        );
+                      },
+                      errorWidget: (context, url, error) {
+                        return Center(
+                          child: Lottie.asset(AppAnimations.lottieFailed),
+                        );
+                      },
+                    ),
         ),
       ),
     );
