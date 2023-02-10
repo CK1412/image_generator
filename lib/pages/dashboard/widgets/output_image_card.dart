@@ -21,9 +21,13 @@ class OutputImageCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: const [
-          ImageBox(),
+          Flexible(
+            child: ImageBox(),
+          ),
+          SizedBox(
+            height: 20,
+          ),
           ControlBox(),
         ],
       ),
@@ -31,27 +35,20 @@ class OutputImageCard extends StatelessWidget {
   }
 }
 
-class ControlBox extends ConsumerStatefulWidget {
+class ControlBox extends ConsumerWidget {
   const ControlBox({super.key});
 
   @override
-  ConsumerState createState() => _ControlBoxState();
-}
-
-class _ControlBoxState extends ConsumerState<ControlBox> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final dashboardState = ref.watch(dashboardViewModelProvider);
 
     final imageUrl = dashboardState.imageUrl;
 
     return Visibility(
       visible: imageUrl != null,
-      child: Container(
-        margin: const EdgeInsets.only(top: 20),
-        constraints: const BoxConstraints(
-          maxWidth: 512,
-        ),
+      replacement: const SizedBox(height: 32),
+      child: SizedBox(
+        width: 512,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
