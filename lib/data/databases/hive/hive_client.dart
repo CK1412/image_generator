@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../models/image.dart';
+import '../../models/image_data.dart';
 
 const _imageBox = 'images';
 
@@ -9,7 +9,7 @@ class HiveClient {
 
   static Future<void> init() async {
     await Hive.initFlutter();
-    Hive.registerAdapter(ImageAdapter());
+    Hive.registerAdapter(ImageDataAdapter());
     await Hive.openBox(_imageBox);
   }
 }

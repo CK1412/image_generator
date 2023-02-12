@@ -12,7 +12,7 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return IgnorePointer(
-      ignoring: ref.watch(dashboardViewModelProvider).isGeneratingImage,
+      ignoring: ref.watch(dashboardViewModelProvider).isFreezedUI,
       child: SafeArea(
         child: Scaffold(
           backgroundColor: AppColors.bgSidebarLeft,
