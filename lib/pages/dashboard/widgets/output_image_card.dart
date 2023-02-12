@@ -54,7 +54,7 @@ class ControlBox extends ConsumerWidget {
           children: [
             // Download button
             ControlButton(
-              onTap: _downloadImage,
+              onTap: () async {},
               child: const Icon(Icons.download_rounded),
             )
           ],

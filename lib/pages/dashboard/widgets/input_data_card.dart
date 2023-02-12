@@ -115,10 +115,6 @@ class _InputDataCardState extends ConsumerState<InputDataCard> {
               const Spacer(),
             ],
           ),
-          Expanded(
-            child:
-                Text(ref.watch(dashboardViewModelProvider).inputText ?? 'null'),
-          )
         ],
       ),
     );
@@ -126,12 +122,6 @@ class _InputDataCardState extends ConsumerState<InputDataCard> {
 
   Future<void> _generateImage() async {
     await ref.read(dashboardViewModelProvider.notifier).generateImage();
-
-    // TODO
-
-    if (!ref.watch(dashboardViewModelProvider).isSaveBtnActive) {
-      ref.read(dashboardViewModelProvider.notifier).setsIsSaveBtnActive(true);
-    }
   }
 
   void _clearAllText() {
