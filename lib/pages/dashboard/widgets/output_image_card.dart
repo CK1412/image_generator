@@ -62,8 +62,4 @@ class ControlBox extends ConsumerWidget {
       ),
     );
   }
-
-  Future<void> _downloadImage() async {
-    // TODO
-  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'data/databases/hive/hive_client.dart';
 
 import 'constants/resources/colors.dart';
 import 'home_page.dart';
@@ -9,6 +10,8 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await dotenv.load(fileName: '.env');
+
+  await HiveClient.init();
 
   runApp(
     const ProviderScope(
