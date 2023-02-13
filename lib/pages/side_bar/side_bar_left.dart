@@ -77,7 +77,8 @@ class _ImageListInGalleryState extends ConsumerState<ImageListInGallery> {
     return ValueListenableBuilder<Box<ImageModel>>(
       valueListenable: imageBox.listenable(),
       builder: (context, box, child) {
-        final images = box.values.toList();
+        final images = box.values.toList().reversed.toList();
+
         return RawScrollbar(
           thumbColor: AppColors.lightGrey,
           radius: const Radius.circular(6),
@@ -89,7 +90,10 @@ class _ImageListInGalleryState extends ConsumerState<ImageListInGallery> {
               return DrawerListTile(
                 imageBytes: images[index].bytes,
                 title: images[index].name,
-                onPressed: () {},
+                onSelected: () {},
+                onDelete: () {
+                  images[index].delete();
+                },
                 isSelected: true,
               );
             },

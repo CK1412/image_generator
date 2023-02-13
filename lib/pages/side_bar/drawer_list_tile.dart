@@ -10,13 +10,15 @@ class DrawerListTile extends StatelessWidget {
     super.key,
     required this.title,
     required this.imageBytes,
-    required this.onPressed,
+    required this.onSelected,
+    required this.onDelete,
     this.isSelected = false,
   });
 
   final String title;
   final Uint8List imageBytes;
-  final VoidCallback onPressed;
+  final VoidCallback onSelected;
+  final VoidCallback onDelete;
   final bool isSelected;
 
   @override
@@ -25,7 +27,7 @@ class DrawerListTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: InkWell(
         borderRadius: BorderRadius.circular(8),
-        onTap: onPressed,
+        onTap: onSelected,
         child: Container(
           decoration: BoxDecoration(
             color: isSelected ? AppColors.bgDrawerListTile : null,
@@ -52,7 +54,7 @@ class DrawerListTile extends StatelessWidget {
             ),
             trailing: isSelected
                 ? IconButton(
-                    onPressed: () {},
+                    onPressed: onDelete,
                     icon: const Icon(
                       Icons.delete,
                       color: AppColors.white,
