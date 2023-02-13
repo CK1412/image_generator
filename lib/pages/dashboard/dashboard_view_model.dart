@@ -3,8 +3,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../constants/constants.dart';
 import '../../data/api/api_client.dart';
+import '../../data/databases/hive/hive_client.dart';
 import '../../data/models/image_model.dart';
 import '../../data/providers/api_client_provider.dart';
+import '../../data/providers/hive_client_provider.dart';
 import '../../utils/extensions/string_extension.dart';
 import '../../utils/utils.dart';
 import 'dashboard_state.dart';
@@ -21,6 +23,8 @@ class DashboardViewModel extends _$DashboardViewModel {
   final logger = Logger();
 
   ApiClient get apiClient => ref.read(apiClientProvider);
+
+  HiveClient get hiveClient => ref.read(hiveClientProvider);
 
   void setInputText(String? value) {
     state = state.copyWith(inputText: value);
@@ -122,5 +126,11 @@ class DashboardViewModel extends _$DashboardViewModel {
     }
 
     setIsFreezedUI(false);
+  }
+
+  void saveImageToGallery() {
+    hiveClient.dbImageDao.add(state.image);
+
+    setsIsSaveBtnActive(false);
   }
 }
