@@ -26,8 +26,10 @@ class DashboardViewModel extends _$DashboardViewModel {
 
   HiveClient get hiveClient => ref.read(hiveClientProvider);
 
-  void setInputText(String? value) {
-    state = state.copyWith(inputText: value);
+  String? get inputText => state.textController.text;
+
+  void setInputText(String value) {
+    state.textController.text = value;
   }
 
   void setsIsSaveBtnActive(bool value) {
@@ -54,12 +56,16 @@ class DashboardViewModel extends _$DashboardViewModel {
     state = state.copyWith(isFreezedUI: value);
   }
 
-  void setImage(ImageModel? value) {
-    state = state.copyWith(image: value);
+  void setTempImage(ImageModel? value) {
+    state = state.copyWith(tempImage: value);
+  }
+
+  void setOriginalImage(ImageModel? value) {
+    state = state.copyWith(originalImage: value);
   }
 
   Future<void> generateImage() async {
-    if (state.inputText.isNullOrEmpty) {
+    if (inputText.isNullOrEmpty) {
       return;
     }
 
@@ -95,20 +101,21 @@ class DashboardViewModel extends _$DashboardViewModel {
 
   Future<void> initImageModel(String imgUrl) async {
     final imgData = ImageModel()
-      ..name = state.inputText ?? ''
+      ..name = inputText ?? ''
       ..createdAt = DateTime.now()
       ..bytes = await Utils.urlToUint8List(imgUrl);
 
-    setImage(imgData);
+    setOriginalImage(imgData);
+    setTempImage(imgData);
   }
 
   Future<void> downloadImage() async {
     setIsFreezedUI(true);
 
-    if (state.image != null) {
+    if (state.tempImage != null) {
       await Utils.featurePlatform.downloadImage(
-        bytes: state.image!.bytes,
-        fileName: state.image!.name,
+        bytes: state.tempImage!.bytes,
+        fileName: state.tempImage!.name,
       );
     }
 
@@ -118,10 +125,10 @@ class DashboardViewModel extends _$DashboardViewModel {
   Future<void> shareImage() async {
     setIsFreezedUI(true);
 
-    if (state.image != null) {
+    if (state.tempImage != null) {
       await Utils.featurePlatform.shareImage(
-        bytes: state.image!.bytes,
-        fileName: state.image!.name,
+        bytes: state.tempImage!.bytes,
+        fileName: state.tempImage!.name,
       );
     }
 
@@ -129,7 +136,7 @@ class DashboardViewModel extends _$DashboardViewModel {
   }
 
   void saveImageToGallery() {
-    hiveClient.dbImageDao.add(state.image);
+    hiveClient.dbImageDao.add(state.tempImage);
 
     setsIsSaveBtnActive(false);
   }

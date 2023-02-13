@@ -7,6 +7,7 @@ import '../../constants/resources/colors.dart';
 import '../../data/databases/hive/hive_client.dart';
 import '../../data/models/image_model.dart';
 import '../../data/providers/hive_client_provider.dart';
+import '../dashboard/dashboard_view_model.dart';
 import 'drawer_list_tile.dart';
 
 class SidebarLeft extends ConsumerStatefulWidget {
@@ -87,19 +88,31 @@ class _ImageListInGalleryState extends ConsumerState<ImageListInGallery> {
             controller: _scrollController,
             itemCount: box.length,
             itemBuilder: (context, index) {
+              final isSelected = images[index] ==
+                  ref.watch(dashboardViewModelProvider).originalImage;
+
               return DrawerListTile(
                 imageBytes: images[index].bytes,
                 title: images[index].name,
-                onSelected: () {},
+                onSelected: () {
+                  _selectedListTile(images[index]);
+                },
                 onDelete: () {
                   images[index].delete();
                 },
-                isSelected: true,
+                isSelected: isSelected,
               );
             },
           ),
         );
       },
     );
+  }
+
+  void _selectedListTile(ImageModel image) {
+    ref.read(dashboardViewModelProvider.notifier).setOriginalImage(image);
+
+    ref.read(dashboardViewModelProvider.notifier).setTempImage(image);
+    ref.read(dashboardViewModelProvider.notifier).setInputText(image.name);
   }
 }
