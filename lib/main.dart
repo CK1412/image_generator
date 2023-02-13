@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'data/databases/hive/hive_client.dart';
 
 import 'constants/resources/colors.dart';
+import 'data/databases/hive/hive_client.dart';
 import 'home_page.dart';
 
 Future main() async {
