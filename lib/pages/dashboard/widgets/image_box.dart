@@ -19,7 +19,7 @@ class ImageBox extends ConsumerWidget {
     final dashboardState = ref.watch(dashboardViewModelProvider);
 
     final imageUrl = dashboardState.imageUrl;
-    final isGeneratingImage = dashboardState.isFreezedUI;
+    final isGeneratingImage = dashboardState.isGeneratingImage;
 
     return Container(
       decoration: BoxDecoration(

@@ -12,6 +12,7 @@ class DashboardState with _$DashboardState {
     @Default(false) bool isSaveBtnActive,
     @Default(false) bool isGenerateBtnActive,
     @Default(false) bool isClearAllBtnActive,
+    @Default(false) bool isGeneratingImage,
     @Default(false) bool isFreezedUI,
     ImageData? image,
   }) = _DashboardState;
