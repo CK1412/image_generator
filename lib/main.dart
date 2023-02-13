@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'constants/resources/colors.dart';
 import 'data/databases/hive/hive_client.dart';
-import 'home_page.dart';
+import 'pages/home_page.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
