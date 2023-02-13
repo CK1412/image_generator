@@ -109,7 +109,7 @@ class _InputDataCardState extends ConsumerState<InputDataCard> {
                 child: CustomFilledButton(
                   isActive: isSaveBtnActive,
                   title: AppTexts.btn4,
-                  onPressed: _saveToList,
+                  onPressed: _saveImage,
                 ),
               ),
               const Spacer(),
@@ -128,8 +128,7 @@ class _InputDataCardState extends ConsumerState<InputDataCard> {
     _textController.clear();
   }
 
-  void _saveToList() {
-    // TODO
-    ref.read(dashboardViewModelProvider.notifier).setsIsSaveBtnActive(false);
+  void _saveImage() {
+    ref.read(dashboardViewModelProvider.notifier).saveImageToGallery();
   }
 }

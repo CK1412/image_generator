@@ -12,7 +12,7 @@ Future main() async {
   await dotenv.load(fileName: '.env');
 
   await HiveClient.init();
-
+  
   runApp(
     const ProviderScope(
       child: MainApp(),
