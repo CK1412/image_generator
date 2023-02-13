@@ -52,29 +52,48 @@ class _SidebarLeftState extends ConsumerState<SidebarLeft> {
   }
 }
 
-class ImageListInGallery extends ConsumerWidget {
+class ImageListInGallery extends ConsumerStatefulWidget {
   const ImageListInGallery({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState createState() => _ImageListInGalleryState();
+}
+
+class _ImageListInGalleryState extends ConsumerState<ImageListInGallery> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final imageBox = ref.watch(hiveClientProvider).dbImageDao.box;
 
     return ValueListenableBuilder<Box<ImageModel>>(
       valueListenable: imageBox.listenable(),
       builder: (context, box, child) {
         final images = box.values.toList();
-        return ListView.builder(
-          itemCount: box.length,
-          itemBuilder: (context, index) {
-            return DrawerListTile(
-              imageBytes: images[index].bytes,
-              title: images[index].name,
-              onPressed: () {},
-              isSelected: true,
-            );
-          },
+        return RawScrollbar(
+          thumbColor: AppColors.lightGrey,
+          radius: const Radius.circular(6),
+          controller: _scrollController,
+          child: ListView.builder(
+            controller: _scrollController,
+            itemCount: box.length,
+            itemBuilder: (context, index) {
+              return DrawerListTile(
+                imageBytes: images[index].bytes,
+                title: images[index].name,
+                onPressed: () {},
+                isSelected: true,
+              );
+            },
+          ),
         );
       },
     );
