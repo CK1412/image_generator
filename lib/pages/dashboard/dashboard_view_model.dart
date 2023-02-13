@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../constants/constants.dart';
 import '../../data/api/api_client.dart';
-import '../../data/models/image_data.dart';
+import '../../data/models/image_model.dart';
 import '../../data/providers/api_client_provider.dart';
 import '../../utils/extensions/string_extension.dart';
 import '../../utils/utils.dart';
@@ -50,7 +50,7 @@ class DashboardViewModel extends _$DashboardViewModel {
     state = state.copyWith(isFreezedUI: value);
   }
 
-  void setImage(ImageData? value) {
+  void setImage(ImageModel? value) {
     state = state.copyWith(image: value);
   }
 
@@ -68,7 +68,8 @@ class DashboardViewModel extends _$DashboardViewModel {
     setImageUrl(Constants.image1);
     // setImageUrl(
     //     'https://oaidalleapiprodscus.blob.core.windows.net/private/org-hrmTDhMF7EYMENxPVjKbrjIy/user-ncs1YMXaZbAjskqynnW7Ps2P/img-jeC6jhVDFMloUDvYbVEqpmS6.png?st=2023-02-12T13%3A59%3A47Z&se=2023-02-12T15%3A59%3A47Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-02-12T13%3A19%3A15Z&ske=2023-02-13T13%3A19%3A15Z&sks=b&skv=2021-08-06&sig=DdTtZt7C2%2BfdO985EaaBPq/9l8%2Bd%2B4pv6DERtdVVqQ0%3D');
-    autoCreateImageData(state.imageUrl!);
+    initImageModel(state.imageUrl!);
+    setsIsSaveBtnActive(true);
 
     // final imageUrl = await apiClient.createImage(
     //   textDescription: state.inputText!,
@@ -78,9 +79,7 @@ class DashboardViewModel extends _$DashboardViewModel {
     //   setImageUrl(imageUrl);
     //   logger.i('Generate image successfully: $imageUrl');
 
-    //   if (!state.isSaveBtnActive) {
-    //     setsIsSaveBtnActive(true);
-    //   }
+    //   setsIsSaveBtnActive(true);
     //   autoCreateImageData(imageUrl);
     // } else {
     //   logger.e('Generate image failed.');
@@ -90,10 +89,10 @@ class DashboardViewModel extends _$DashboardViewModel {
     setIsGeneratingImage(false);
   }
 
-  Future<void> autoCreateImageData(String imgUrl) async {
-    final imgData = ImageData()
+  Future<void> initImageModel(String imgUrl) async {
+    final imgData = ImageModel()
       ..name = state.inputText ?? ''
-      ..createAt = DateTime.now()
+      ..createdAt = DateTime.now()
       ..bytes = await Utils.urlToUint8List(imgUrl);
 
     setImage(imgData);

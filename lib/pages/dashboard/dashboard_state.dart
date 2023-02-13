@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../data/models/image_data.dart';
+import '../../data/models/image_model.dart';
 
 part 'dashboard_state.freezed.dart';
 
@@ -14,7 +14,7 @@ class DashboardState with _$DashboardState {
     @Default(false) bool isClearAllBtnActive,
     @Default(false) bool isGeneratingImage,
     @Default(false) bool isFreezedUI,
-    ImageData? image,
+    ImageModel? image,
   }) = _DashboardState;
 
   factory DashboardState.init() => const DashboardState();
