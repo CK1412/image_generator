@@ -110,9 +110,12 @@ class _ImageListInGalleryState extends ConsumerState<ImageListInGallery> {
   }
 
   void _selectedListTile(ImageModel image) {
+    ref.read(dashboardViewModelProvider.notifier).setInputText(image.name);
+
     ref.read(dashboardViewModelProvider.notifier).setOriginalImage(image);
 
     ref.read(dashboardViewModelProvider.notifier).setTempImage(image);
-    ref.read(dashboardViewModelProvider.notifier).setInputText(image.name);
+
+    ref.read(dashboardViewModelProvider.notifier).setImageUrl(null);
   }
 }

@@ -51,8 +51,10 @@ class _ControlBoxState extends ConsumerState<ControlBox> {
 
     final imageUrl = dashboardState.imageUrl;
 
+    final tempImage = dashboardState.tempImage;
+
     return Visibility(
-      visible: imageUrl != null,
+      visible: imageUrl != null || tempImage != null,
       replacement: const SizedBox(height: 32),
       child: SizedBox(
         width: 512,
