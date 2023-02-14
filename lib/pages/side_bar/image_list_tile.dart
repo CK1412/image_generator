@@ -25,15 +25,15 @@ class ImageListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: isSelected ? AppColors.bgDrawerListTile : null,
+        color: isSelected ? context.colors.bgDrawerListTile : null,
         borderRadius: BorderRadius.circular(6),
       ),
       margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: ListTile(
         selected: isSelected,
-        iconColor: AppColors.grey,
-        hoverColor: AppColors.hoverListTile,
-        selectedColor: AppColors.white,
+        iconColor: context.colors.grey,
+        hoverColor: context.colors.hoverListTile,
+        selectedColor: context.colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6),
         ),
@@ -49,16 +49,16 @@ class ImageListTile extends StatelessWidget {
         title: Text(
           title,
           style: AppTextStyles.textRegular14.copyWith(
-            color: isSelected ? AppColors.white : AppColors.grey,
+            color: isSelected ? context.colors.white : context.colors.grey,
             overflow: TextOverflow.ellipsis,
           ),
         ),
         trailing: isSelected
             ? IconButton(
                 onPressed: onDelete,
-                icon: const Icon(
+                icon: Icon(
                   Icons.delete,
-                  color: AppColors.white,
+                  color: context.colors.white,
                 ),
               )
             : null,

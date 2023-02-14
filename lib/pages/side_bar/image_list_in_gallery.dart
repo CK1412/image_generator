@@ -37,7 +37,7 @@ class _ImageListInGalleryState extends ConsumerState<ImageListInGallery> {
         final images = box.values.toList().reversed.toList();
 
         return RawScrollbar(
-          thumbColor: AppColors.lightGrey,
+          thumbColor: context.colors.lightGrey,
           radius: const Radius.circular(6),
           controller: _scrollController,
           child: ListView.builder(
