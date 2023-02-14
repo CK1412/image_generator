@@ -89,7 +89,7 @@ class DashboardViewModel extends _$DashboardViewModel {
       logger.i('Generate image successfully: $imageUrl');
 
       setsIsSaveBtnActive(true);
-      initImageModel(imageUrl);
+      await initImageModel(imageUrl);
     } else {
       logger.e('Generate image failed.');
     }
