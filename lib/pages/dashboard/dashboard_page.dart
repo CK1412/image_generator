@@ -19,7 +19,7 @@ class _DashboardPageState extends State<DashboardPage> {
       margin: const EdgeInsets.all(8.0),
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-        color: AppColors.bgDashboard,
+        color: context.colors.bgDashboard,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(

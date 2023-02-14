@@ -20,8 +20,8 @@ class CreateNewImageButton extends ConsumerWidget {
         label: const Text(AppTexts.btn1),
         style: OutlinedButton.styleFrom(
           minimumSize: const Size.fromHeight(50),
-          foregroundColor: AppColors.white,
-          side: const BorderSide(color: AppColors.lightGrey),
+          foregroundColor: context.colors.white,
+          side: BorderSide(color: context.colors.lightGrey),
         ),
       ),
     );

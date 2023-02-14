@@ -22,16 +22,16 @@ class DrawerListTile extends StatelessWidget {
         horizontal: 8.0,
       ),
       child: ListTile(
-        iconColor: AppColors.white,
-        selectedColor: AppColors.white,
+        iconColor: context.colors.white,
+        selectedColor: context.colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6),
         ),
-        hoverColor: AppColors.hoverListTile,
+        hoverColor: context.colors.hoverListTile,
         title: Text(
           title,
           style: AppTextStyles.textRegular14.copyWith(
-            color: AppColors.white,
+            color: context.colors.white,
             overflow: TextOverflow.ellipsis,
           ),
         ),

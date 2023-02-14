@@ -19,7 +19,7 @@ class OutputImageCard extends StatelessWidget {
       margin: const EdgeInsets.all(8.0),
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: context.colors.bgDashboardBox,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(

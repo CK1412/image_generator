@@ -14,8 +14,10 @@ class AppTexts {
   // Title of text field
   static const titleTextField1 = 'Enter image description';
 
-  // Title of text field
+  // Title of list tile
   static const titleListTile1 = 'Clear all images';
+  static const titleListTile2 = 'Dark mode';
+  static const titleListTile3 = 'Light mode';
 
   // Title of Dialog
   static const titleDialog1 = 'Confirm clear all images';

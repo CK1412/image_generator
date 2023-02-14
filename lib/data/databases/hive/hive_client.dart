@@ -9,10 +9,14 @@ class HiveClient {
 
   DbImageDao? _dbImageDao;
 
+  Box<bool> get darkModeBox => Hive.box(HiveBoxName.darkMode);
+
   static Future<void> init() async {
     await Hive.initFlutter();
 
     Hive.registerAdapter(ImageModelAdapter());
+
+    await Hive.openBox<bool>(HiveBoxName.darkMode);
 
     await Hive.openBox<ImageModel>(
       HiveBoxName.image,

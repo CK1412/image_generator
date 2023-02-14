@@ -51,7 +51,7 @@ class _InputDataCardState extends ConsumerState<InputDataCard> {
       margin: const EdgeInsets.all(8.0),
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: context.colors.bgDashboardBox,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -60,25 +60,27 @@ class _InputDataCardState extends ConsumerState<InputDataCard> {
           Text(
             AppTexts.titleTextField1,
             style: AppTextStyles.textRegular16.copyWith(
-              color: AppColors.black,
+              color: context.colors.textOnDashboardBox,
             ),
           ),
           Text(
             AppTexts.description1,
             style: AppTextStyles.textLight12.copyWith(
-              color: AppColors.grey,
+              color: context.colors.grey,
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12.0),
             child: TextField(
               controller: _textController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.grey),
+                  borderSide: BorderSide(color: context.colors.grey),
                 ),
               ),
-              style: AppTextStyles.textRegular14,
+              style: AppTextStyles.textRegular14.copyWith(
+                color: context.colors.textOnDashboardBox,
+              ),
               maxLines: 5,
             ),
           ),

@@ -14,7 +14,7 @@ class DashboardHeader extends StatelessWidget {
       child: Text(
         AppTexts.title1,
         style: AppTextStyles.textMedium20.copyWith(
-          color: AppColors.black,
+          color: context.colors.textOnBgDashboard,
           letterSpacing: 0.4,
         ),
       ),

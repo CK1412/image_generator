@@ -23,7 +23,7 @@ class SidebarLeft extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Divider(
-              color: AppColors.lightGrey.withAlpha(100),
+              color: context.colors.lightGrey.withAlpha(100),
             ),
           ),
           const Expanded(

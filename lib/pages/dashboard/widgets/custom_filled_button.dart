@@ -22,7 +22,7 @@ class CustomFilledButton extends StatelessWidget {
       child: FilledButton(
         onPressed: onPressed,
         style: FilledButton.styleFrom(
-          backgroundColor: isActive ? null : AppColors.grey,
+          backgroundColor: isActive ? null : context.colors.grey,
         ),
         child: Text(title),
       ),

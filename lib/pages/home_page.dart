@@ -15,7 +15,7 @@ class HomePage extends ConsumerWidget {
       ignoring: ref.watch(dashboardViewModelProvider).isFreezedUI,
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: AppColors.bgSidebarLeft,
+          backgroundColor: context.colors.bgSidebarLeft,
           body: Row(
             children: const [
               Expanded(

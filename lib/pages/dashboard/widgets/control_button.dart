@@ -19,7 +19,7 @@ class ControlButton extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
-          color: AppColors.lightGrey,
+          color: context.colors.lightGrey,
         ),
         child: child,
       ),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../constants/app_texts.dart';
+import '../../data/databases/hive/hive_boxes.dart';
 import '../../data/databases/hive/hive_client.dart';
 import '../../data/providers/hive_client_provider.dart';
 import '../../utils/utils.dart';
@@ -36,6 +37,31 @@ class _FeatureListState extends ConsumerState<FeatureList> {
             } else {
               return const SizedBox.shrink();
             }
+          },
+        ),
+        // Dark - light mode
+        ValueListenableBuilder(
+          valueListenable:
+              ref.watch(hiveClientProvider).darkModeBox.listenable(),
+          builder: (context, box, child) {
+            final bool isDarkMode = box.get(
+                  DarkModeKey.darkMode,
+                  defaultValue: false,
+                ) ??
+                false;
+
+            final title =
+                isDarkMode ? AppTexts.titleListTile2 : AppTexts.titleListTile3;
+
+            final iconData = isDarkMode ? Icons.dark_mode : Icons.light_mode;
+
+            return DrawerListTile(
+              iconData: iconData,
+              title: title,
+              onTap: () {
+                box.put(DarkModeKey.darkMode, !isDarkMode);
+              },
+            );
           },
         ),
       ],

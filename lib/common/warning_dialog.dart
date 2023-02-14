@@ -23,9 +23,17 @@ class WarningDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(title),
-      content: message != null ? Text(message!) : null,
-      backgroundColor: AppColors.bgDashboard,
+      title: Text(
+        title,
+        style: TextStyle(color: context.colors.titleDialog),
+      ),
+      content: message != null
+          ? Text(
+              message!,
+              style: TextStyle(color: context.colors.titleDialog),
+            )
+          : null,
+      backgroundColor: context.colors.bgDialog,
       actions: [
         if (negativeButtonText != null && onNegativeButtonTap != null)
           TextButton(
@@ -33,7 +41,7 @@ class WarningDialog extends StatelessWidget {
             child: Text(negativeButtonText!),
           ),
         FilledButton(
-          style: FilledButton.styleFrom(backgroundColor: AppColors.red),
+          style: FilledButton.styleFrom(backgroundColor: context.colors.red),
           onPressed: () {
             onPositiveButtonTap();
             Navigator.of(context).pop();
