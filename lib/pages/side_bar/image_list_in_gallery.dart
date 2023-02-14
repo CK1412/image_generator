@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -8,7 +7,7 @@ import '../../data/databases/hive/hive_client.dart';
 import '../../data/models/image_model.dart';
 import '../../data/providers/hive_client_provider.dart';
 import '../dashboard/dashboard_view_model.dart';
-import 'drawer_list_tile.dart';
+import 'image_list_tile.dart';
 
 class ImageListInGallery extends ConsumerStatefulWidget {
   const ImageListInGallery({
@@ -48,7 +47,7 @@ class _ImageListInGalleryState extends ConsumerState<ImageListInGallery> {
               final isSelected = images[index] ==
                   ref.watch(dashboardViewModelProvider).originalImage;
 
-              return DrawerListTile(
+              return ImageListTile(
                 imageBytes: images[index].bytes,
                 title: images[index].name,
                 onSelected: () {

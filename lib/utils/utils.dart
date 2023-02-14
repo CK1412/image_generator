@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../common/warning_dialog.dart';
 import 'platform_impl/stub_feature.dart'
     if (dart.library.io) 'platform_impl/mobile_feature.dart'
     if (dart.library.html) 'platform_impl/web_feature.dart';
@@ -32,5 +33,29 @@ class Utils {
         ),
       );
     }
+  }
+
+  static Future<void> showWarningAlertDialog(
+    BuildContext context, {
+    String title = '',
+    String? message,
+    required String positiveButtonText,
+    required final VoidCallback onPositiveButtonTap,
+    String? negativeButtonText,
+    final VoidCallback? onNegativeButtonTap,
+  }) async {
+    await showDialog(
+      barrierDismissible: false,
+      context: context,
+      useRootNavigator: false,
+      builder: (context) => WarningDialog(
+        title: title,
+        message: message,
+        positiveButtonText: positiveButtonText,
+        onPositiveButtonTap: onPositiveButtonTap,
+        negativeButtonText: negativeButtonText,
+        onNegativeButtonTap: onNegativeButtonTap,
+      ),
+    );
   }
 }
