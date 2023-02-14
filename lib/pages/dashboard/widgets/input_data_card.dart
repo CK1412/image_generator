@@ -15,15 +15,15 @@ class InputDataCard extends ConsumerStatefulWidget {
 }
 
 class _InputDataCardState extends ConsumerState<InputDataCard> {
-  final _textController = TextEditingController();
+  late final TextEditingController _textController;
 
   @override
   void initState() {
     super.initState();
+    _textController = ref.read(dashboardViewModelProvider).textController;
     _textController.addListener(() {
       final value = _textController.text;
 
-      ref.read(dashboardViewModelProvider.notifier).setInputText(value);
       ref
           .read(dashboardViewModelProvider.notifier)
           .setsIsGenerateBtnActive(value.isNotEmpty);

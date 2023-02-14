@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'common/my_custom_scroll_behavior.dart';
 import 'constants/resources/colors.dart';
 import 'data/databases/hive/hive_client.dart';
-import 'home_page.dart';
+import 'pages/home_page.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +13,7 @@ Future main() async {
   await dotenv.load(fileName: '.env');
 
   await HiveClient.init();
-  
+
   runApp(
     const ProviderScope(
       child: MainApp(),
@@ -27,9 +28,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'image generator',
-      theme: ThemeData.light(
-        useMaterial3: true,
-      ).copyWith(
+      theme: ThemeData.light(useMaterial3: true).copyWith(
         primaryColor: AppColors.green,
         colorScheme: const ColorScheme.light().copyWith(
           primary: AppColors.green,
@@ -38,6 +37,7 @@ class MainApp extends StatelessWidget {
           backgroundColor: AppColors.bgSidebarLeft,
         ),
       ),
+      scrollBehavior: MyCustomScrollBehavior(),
       home: const HomePage(),
     );
   }

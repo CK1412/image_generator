@@ -1,7 +1,6 @@
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../constants/constants.dart';
 import '../../data/api/api_client.dart';
 import '../../data/databases/hive/hive_client.dart';
 import '../../data/models/image_model.dart';
@@ -26,8 +25,10 @@ class DashboardViewModel extends _$DashboardViewModel {
 
   HiveClient get hiveClient => ref.read(hiveClientProvider);
 
-  void setInputText(String? value) {
-    state = state.copyWith(inputText: value);
+  String? get inputText => state.textController.text;
+
+  void setInputText(String value) {
+    state.textController.text = value;
   }
 
   void setsIsSaveBtnActive(bool value) {
@@ -54,12 +55,16 @@ class DashboardViewModel extends _$DashboardViewModel {
     state = state.copyWith(isFreezedUI: value);
   }
 
-  void setImage(ImageModel? value) {
-    state = state.copyWith(image: value);
+  void setTempImage(ImageModel? value) {
+    state = state.copyWith(tempImage: value);
+  }
+
+  void setOriginalImage(ImageModel? value) {
+    state = state.copyWith(originalImage: value);
   }
 
   Future<void> generateImage() async {
-    if (state.inputText.isNullOrEmpty) {
+    if (inputText.isNullOrEmpty) {
       return;
     }
 
@@ -69,25 +74,25 @@ class DashboardViewModel extends _$DashboardViewModel {
 
     // await Future.delayed(const Duration(seconds: 2));
 
-    setImageUrl(Constants.image1);
+    // setImageUrl(Constants.image1);
     // setImageUrl(
     //     'https://oaidalleapiprodscus.blob.core.windows.net/private/org-hrmTDhMF7EYMENxPVjKbrjIy/user-ncs1YMXaZbAjskqynnW7Ps2P/img-jeC6jhVDFMloUDvYbVEqpmS6.png?st=2023-02-12T13%3A59%3A47Z&se=2023-02-12T15%3A59%3A47Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-02-12T13%3A19%3A15Z&ske=2023-02-13T13%3A19%3A15Z&sks=b&skv=2021-08-06&sig=DdTtZt7C2%2BfdO985EaaBPq/9l8%2Bd%2B4pv6DERtdVVqQ0%3D');
-    initImageModel(state.imageUrl!);
-    setsIsSaveBtnActive(true);
+    // initImageModel(state.imageUrl!);
+    // setsIsSaveBtnActive(true);
 
-    // final imageUrl = await apiClient.createImage(
-    //   textDescription: state.inputText!,
-    // );
+    final imageUrl = await apiClient.createImage(
+      textDescription: inputText!,
+    );
 
-    // if (imageUrl.isNotEmpty) {
-    //   setImageUrl(imageUrl);
-    //   logger.i('Generate image successfully: $imageUrl');
+    if (imageUrl.isNotEmpty) {
+      setImageUrl(imageUrl);
+      logger.i('Generate image successfully: $imageUrl');
 
-    //   setsIsSaveBtnActive(true);
-    //   autoCreateImageData(imageUrl);
-    // } else {
-    //   logger.e('Generate image failed.');
-    // }
+      setsIsSaveBtnActive(true);
+      initImageModel(imageUrl);
+    } else {
+      logger.e('Generate image failed.');
+    }
 
     setIsFreezedUI(false);
     setIsGeneratingImage(false);
@@ -95,20 +100,21 @@ class DashboardViewModel extends _$DashboardViewModel {
 
   Future<void> initImageModel(String imgUrl) async {
     final imgData = ImageModel()
-      ..name = state.inputText ?? ''
+      ..name = inputText ?? ''
       ..createdAt = DateTime.now()
       ..bytes = await Utils.urlToUint8List(imgUrl);
 
-    setImage(imgData);
+    setOriginalImage(imgData);
+    setTempImage(imgData);
   }
 
   Future<void> downloadImage() async {
     setIsFreezedUI(true);
 
-    if (state.image != null) {
+    if (state.tempImage != null) {
       await Utils.featurePlatform.downloadImage(
-        bytes: state.image!.bytes,
-        fileName: state.image!.name,
+        bytes: state.tempImage!.bytes,
+        fileName: state.tempImage!.name,
       );
     }
 
@@ -118,10 +124,10 @@ class DashboardViewModel extends _$DashboardViewModel {
   Future<void> shareImage() async {
     setIsFreezedUI(true);
 
-    if (state.image != null) {
+    if (state.tempImage != null) {
       await Utils.featurePlatform.shareImage(
-        bytes: state.image!.bytes,
-        fileName: state.image!.name,
+        bytes: state.tempImage!.bytes,
+        fileName: state.tempImage!.name,
       );
     }
 
@@ -129,8 +135,23 @@ class DashboardViewModel extends _$DashboardViewModel {
   }
 
   void saveImageToGallery() {
-    hiveClient.dbImageDao.add(state.image);
+    hiveClient.dbImageDao.add(state.tempImage);
 
     setsIsSaveBtnActive(false);
+  }
+
+  void resetData() {
+    state = state.copyWith(
+      imageUrl: null,
+      isFreezedUI: false,
+      isClearAllBtnActive: false,
+      isGenerateBtnActive: false,
+      isGeneratingImage: false,
+      isSaveBtnActive: false,
+      originalImage: null,
+      tempImage: null,
+    );
+
+    setInputText('');
   }
 }

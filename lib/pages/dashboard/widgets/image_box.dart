@@ -18,7 +18,6 @@ class ImageBox extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final dashboardState = ref.watch(dashboardViewModelProvider);
 
-    final imageUrl = dashboardState.imageUrl;
     final isGeneratingImage = dashboardState.isGeneratingImage;
 
     return Container(
@@ -53,29 +52,56 @@ class ImageBox extends ConsumerWidget {
                     ],
                   ),
                 )
-              : imageUrl == null
-                  ? SvgPicture.asset(
-                      AppIcons.svgPicture,
-                      fit: BoxFit.cover,
-                    )
-                  : CachedNetworkImage(
-                      imageUrl: imageUrl,
-                      fit: BoxFit.cover,
-                      useOldImageOnUrlChange: true,
-                      filterQuality: FilterQuality.high,
-                      placeholder: (context, url) {
-                        return Center(
-                          child: Lottie.asset(AppAnimations.lottieLoading),
-                        );
-                      },
-                      errorWidget: (context, url, error) {
-                        return Center(
-                          child: Lottie.asset(AppAnimations.lottieFailed),
-                        );
-                      },
-                    ),
+              : const ImageDisplayed(),
         ),
       ),
     );
+  }
+}
+
+class ImageDisplayed extends ConsumerWidget {
+  const ImageDisplayed({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dashboardState = ref.watch(dashboardViewModelProvider);
+
+    final imageUrl = dashboardState.imageUrl;
+
+    final tempImage = dashboardState.tempImage;
+
+    if (tempImage == null && imageUrl == null) {
+      return SvgPicture.asset(
+        AppIcons.svgPicture,
+        fit: BoxFit.cover,
+      );
+    }
+    //
+    else if (tempImage == null && imageUrl != null) {
+      return CachedNetworkImage(
+        imageUrl: imageUrl,
+        fit: BoxFit.cover,
+        useOldImageOnUrlChange: true,
+        filterQuality: FilterQuality.high,
+        placeholder: (context, url) {
+          return Center(
+            child: Lottie.asset(AppAnimations.lottieLoading),
+          );
+        },
+        errorWidget: (context, url, error) {
+          return Center(
+            child: Lottie.asset(AppAnimations.lottieFailed),
+          );
+        },
+      );
+    }
+    //
+    else if (tempImage != null) {
+      return Image.memory(tempImage.bytes);
+    }
+    //
+    else {
+      return const SizedBox.shrink();
+    }
   }
 }
