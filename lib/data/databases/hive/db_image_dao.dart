@@ -26,4 +26,8 @@ class DbImageDao {
       data.delete();
     }
   }
+
+  Future<int> deleteAll() async {
+    return await box.clear();
+  }
 }

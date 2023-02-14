@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 
 import '../../constants/resources/colors.dart';
@@ -8,56 +6,37 @@ import '../../constants/resources/text_styles.dart';
 class DrawerListTile extends StatelessWidget {
   const DrawerListTile({
     super.key,
+    required this.iconData,
     required this.title,
-    required this.imageBytes,
-    required this.onSelected,
-    required this.onDelete,
-    this.isSelected = false,
+    required this.onTap,
   });
 
+  final IconData iconData;
   final String title;
-  final Uint8List imageBytes;
-  final VoidCallback onSelected;
-  final VoidCallback onDelete;
-  final bool isSelected;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: isSelected ? AppColors.bgDrawerListTile : null,
-        borderRadius: BorderRadius.circular(6),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 8.0,
       ),
-      margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: ListTile(
-        selected: isSelected,
-        iconColor: AppColors.grey,
+        iconColor: AppColors.white,
         selectedColor: AppColors.white,
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 12,
-        ),
-        leading: ClipRRect(
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6),
-          child: Image.memory(imageBytes),
         ),
-        onTap: onSelected,
+        hoverColor: AppColors.hoverListTile,
         title: Text(
           title,
           style: AppTextStyles.textRegular14.copyWith(
-            color: isSelected ? AppColors.white : AppColors.grey,
+            color: AppColors.white,
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        trailing: isSelected
-            ? IconButton(
-                onPressed: onDelete,
-                icon: const Icon(
-                  Icons.delete,
-                  color: AppColors.white,
-                ),
-              )
-            : null,
+        leading: Icon(iconData),
+        onTap: onTap,
       ),
     );
   }

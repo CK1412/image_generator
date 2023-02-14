@@ -1,6 +1,7 @@
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../constants/constants.dart';
 import '../../data/api/api_client.dart';
 import '../../data/databases/hive/hive_client.dart';
 import '../../data/models/image_model.dart';
@@ -74,25 +75,23 @@ class DashboardViewModel extends _$DashboardViewModel {
 
     // await Future.delayed(const Duration(seconds: 2));
 
-    // setImageUrl(Constants.image1);
-    // setImageUrl(
-    //     'https://oaidalleapiprodscus.blob.core.windows.net/private/org-hrmTDhMF7EYMENxPVjKbrjIy/user-ncs1YMXaZbAjskqynnW7Ps2P/img-jeC6jhVDFMloUDvYbVEqpmS6.png?st=2023-02-12T13%3A59%3A47Z&se=2023-02-12T15%3A59%3A47Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-02-12T13%3A19%3A15Z&ske=2023-02-13T13%3A19%3A15Z&sks=b&skv=2021-08-06&sig=DdTtZt7C2%2BfdO985EaaBPq/9l8%2Bd%2B4pv6DERtdVVqQ0%3D');
-    // initImageModel(state.imageUrl!);
-    // setsIsSaveBtnActive(true);
+    setImageUrl(Constants.image1);
+    await initImageModel(state.imageUrl!);
+    setsIsSaveBtnActive(true);
 
-    final imageUrl = await apiClient.createImage(
-      textDescription: inputText!,
-    );
+    // final imageUrl = await apiClient.createImage(
+    //   textDescription: inputText!,
+    // );
 
-    if (imageUrl.isNotEmpty) {
-      setImageUrl(imageUrl);
-      logger.i('Generate image successfully: $imageUrl');
+    // if (imageUrl.isNotEmpty) {
+    //   setImageUrl(imageUrl);
+    //   logger.i('Generate image successfully: $imageUrl');
 
-      setsIsSaveBtnActive(true);
-      initImageModel(imageUrl);
-    } else {
-      logger.e('Generate image failed.');
-    }
+    //   setsIsSaveBtnActive(true);
+    //   await initImageModel(imageUrl);
+    // } else {
+    //   logger.e('Generate image failed.');
+    // }
 
     setIsFreezedUI(false);
     setIsGeneratingImage(false);

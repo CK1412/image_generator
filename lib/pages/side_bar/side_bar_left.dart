@@ -1,54 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../constants/app_texts.dart';
 import '../../constants/resources/colors.dart';
-import '../dashboard/dashboard_view_model.dart';
+import 'create_new_image_button.dart';
+import 'feature_list.dart';
 import 'image_list_in_gallery.dart';
 
-class SidebarLeft extends ConsumerStatefulWidget {
+class SidebarLeft extends ConsumerWidget {
   const SidebarLeft({super.key});
 
   @override
-  ConsumerState createState() => _SidebarLeftState();
-}
-
-class _SidebarLeftState extends ConsumerState<SidebarLeft> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
       elevation: 0,
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: OutlinedButton.icon(
-              onPressed: _createNewImage,
-              icon: const Icon(Icons.add),
-              label: const Text(AppTexts.btn1),
-              style: OutlinedButton.styleFrom(
-                minimumSize: const Size.fromHeight(50),
-                foregroundColor: AppColors.white,
-              ),
-            ),
-          ),
+          const CreateNewImageButton(),
           const Expanded(
             flex: 2,
             child: ImageListInGallery(),
           ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Divider(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Divider(
+              color: AppColors.lightGrey.withAlpha(100),
+            ),
           ),
-          Expanded(
-            child: Container(),
+          const Expanded(
+            child: FeatureList(),
           ),
         ],
       ),
     );
-  }
-
-  void _createNewImage() {
-    ref.read(dashboardViewModelProvider.notifier).resetData();
   }
 }
