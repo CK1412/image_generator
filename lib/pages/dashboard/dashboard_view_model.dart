@@ -1,7 +1,8 @@
+import 'dart:convert';
+
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../constants/constants.dart';
 import '../../data/api/api_client.dart';
 import '../../data/databases/hive/hive_client.dart';
 import '../../data/models/image_model.dart';
@@ -44,10 +45,6 @@ class DashboardViewModel extends _$DashboardViewModel {
     state = state.copyWith(isGenerateBtnActive: value);
   }
 
-  void setImageUrl(String? value) {
-    state = state.copyWith(imageUrl: value);
-  }
-
   void setIsGeneratingImage(bool value) {
     state = state.copyWith(isGeneratingImage: value);
   }
@@ -73,35 +70,28 @@ class DashboardViewModel extends _$DashboardViewModel {
     setIsGeneratingImage(true);
     logger.d('Generating image...');
 
-    // await Future.delayed(const Duration(seconds: 2));
+    final imageB64 = await apiClient.createImage(
+      textDescription: inputText!,
+    );
 
-    setImageUrl(Constants.image1);
-    await initImageModel(state.imageUrl!);
-    setsIsSaveBtnActive(true);
+    if (imageB64.isNotEmpty) {
+      logger.i('Generate image successfully');
 
-    // final imageUrl = await apiClient.createImage(
-    //   textDescription: inputText!,
-    // );
-
-    // if (imageUrl.isNotEmpty) {
-    //   setImageUrl(imageUrl);
-    //   logger.i('Generate image successfully: $imageUrl');
-
-    //   setsIsSaveBtnActive(true);
-    //   await initImageModel(imageUrl);
-    // } else {
-    //   logger.e('Generate image failed.');
-    // }
+      setsIsSaveBtnActive(true);
+      await initImageModel(imageB64);
+    } else {
+      logger.e('Generate image failed.');
+    }
 
     setIsFreezedUI(false);
     setIsGeneratingImage(false);
   }
 
-  Future<void> initImageModel(String imgUrl) async {
+  Future<void> initImageModel(String b64Json) async {
     final imgData = ImageModel()
       ..name = inputText ?? ''
       ..createdAt = DateTime.now()
-      ..bytes = await Utils.urlToUint8List(imgUrl);
+      ..bytes = base64Decode(b64Json);
 
     setOriginalImage(imgData);
     setTempImage(imgData);
@@ -141,7 +131,6 @@ class DashboardViewModel extends _$DashboardViewModel {
 
   void resetData() {
     state = state.copyWith(
-      imageUrl: null,
       isFreezedUI: false,
       isClearAllBtnActive: false,
       isGenerateBtnActive: false,

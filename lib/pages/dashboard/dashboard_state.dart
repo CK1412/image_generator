@@ -9,7 +9,6 @@ part 'dashboard_state.freezed.dart';
 class DashboardState with _$DashboardState {
   const factory DashboardState({
     required TextEditingController textController,
-    String? imageUrl,
     @Default(false) bool isSaveBtnActive,
     @Default(false) bool isGenerateBtnActive,
     @Default(false) bool isClearAllBtnActive,
