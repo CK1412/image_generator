@@ -34,12 +34,6 @@ class _InputDataCardState extends ConsumerState<InputDataCard> {
   }
 
   @override
-  void dispose() {
-    _textController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final dashboardState = ref.watch(dashboardViewModelProvider);
 

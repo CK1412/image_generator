@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../common/app_responsive.dart';
 import '../../constants/resources/colors.dart';
 import 'widgets/dashboard_header.dart';
 import 'widgets/input_data_card.dart';
@@ -25,7 +26,7 @@ class _DashboardPageState extends State<DashboardPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const DashboardHeader(),
+          if (AppResponsive.isDesktop(context)) const DashboardHeader(),
           Expanded(
             child: Row(
               children: const [
