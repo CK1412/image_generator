@@ -13,6 +13,7 @@ class ApiClient {
   final Client client;
   final ApiConfig apiConfig;
 
+  // return b64_json format
   Future<String> createImage({
     required String textDescription,
     int quantity = 1,
@@ -28,11 +29,12 @@ class ApiClient {
         'prompt': textDescription,
         'n': quantity,
         'size': size,
+        'response_format': 'b64_json'
       }),
     );
 
     if (response.statusCode == 200) {
-      final imageUrl = jsonDecode(response.body)['data'][0]['url'];
+      final imageUrl = jsonDecode(response.body)['data'][0]['b64_json'];
       return imageUrl;
     } else {
       return '';

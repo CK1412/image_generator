@@ -49,12 +49,10 @@ class _ControlBoxState extends ConsumerState<ControlBox> {
   Widget build(BuildContext context) {
     final dashboardState = ref.watch(dashboardViewModelProvider);
 
-    final imageUrl = dashboardState.imageUrl;
-
     final tempImage = dashboardState.tempImage;
 
     return Visibility(
-      visible: imageUrl != null || tempImage != null,
+      visible: tempImage != null,
       replacement: const SizedBox(height: 32),
       child: SizedBox(
         width: 512,

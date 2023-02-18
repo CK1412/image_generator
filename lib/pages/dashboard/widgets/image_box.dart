@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -66,42 +65,17 @@ class ImageDisplayed extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final dashboardState = ref.watch(dashboardViewModelProvider);
 
-    final imageUrl = dashboardState.imageUrl;
-
     final tempImage = dashboardState.tempImage;
 
-    if (tempImage == null && imageUrl == null) {
+    if (tempImage == null) {
       return SvgPicture.asset(
         AppIcons.svgPicture,
         fit: BoxFit.cover,
       );
     }
     //
-    else if (tempImage == null && imageUrl != null) {
-      return CachedNetworkImage(
-        imageUrl: imageUrl,
-        fit: BoxFit.cover,
-        useOldImageOnUrlChange: true,
-        filterQuality: FilterQuality.high,
-        placeholder: (context, url) {
-          return Center(
-            child: Lottie.asset(AppAnimations.lottieLoading),
-          );
-        },
-        errorWidget: (context, url, error) {
-          return Center(
-            child: Lottie.asset(AppAnimations.lottieFailed),
-          );
-        },
-      );
-    }
-    //
-    else if (tempImage != null) {
-      return Image.memory(tempImage.bytes);
-    }
-    //
     else {
-      return const SizedBox.shrink();
+      return Image.memory(tempImage.bytes);
     }
   }
 }

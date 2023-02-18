@@ -71,7 +71,5 @@ class _ImageListInGalleryState extends ConsumerState<ImageListInGallery> {
     ref.read(dashboardViewModelProvider.notifier).setOriginalImage(image);
 
     ref.read(dashboardViewModelProvider.notifier).setTempImage(image);
-
-    ref.read(dashboardViewModelProvider.notifier).setImageUrl(null);
   }
 }
