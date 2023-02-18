@@ -77,8 +77,9 @@ class DashboardViewModel extends _$DashboardViewModel {
     if (imageB64.isNotEmpty) {
       logger.i('Generate image successfully');
 
-      setsIsSaveBtnActive(true);
       await initImageModel(imageB64);
+      
+      setsIsSaveBtnActive(true);
     } else {
       logger.e('Generate image failed.');
     }
