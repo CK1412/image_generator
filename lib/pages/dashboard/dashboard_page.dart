@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../common/app_responsive.dart';
 import '../../constants/resources/colors.dart';
 import 'widgets/dashboard_header.dart';
 import 'widgets/input_data_card.dart';
@@ -22,24 +23,31 @@ class _DashboardPageState extends State<DashboardPage> {
         color: context.colors.bgDashboard,
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const DashboardHeader(),
-          Expanded(
-            child: Row(
-              children: const [
+      child: (AppResponsive.isDesktop(context))
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const DashboardHeader(),
                 Expanded(
-                  child: InputDataCard(),
-                ),
-                Expanded(
-                  child: OutputImageCard(),
+                  child: Row(
+                    children: const [
+                      Expanded(
+                        child: InputDataCard(),
+                      ),
+                      Expanded(
+                        child: OutputImageCard(),
+                      ),
+                    ],
+                  ),
                 ),
               ],
+            )
+          : ListView(
+              children: const [
+                InputDataCard(),
+                OutputImageCard(),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }
