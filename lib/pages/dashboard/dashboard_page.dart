@@ -23,24 +23,36 @@ class _DashboardPageState extends State<DashboardPage> {
         color: context.colors.bgDashboard,
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (AppResponsive.isDesktop(context)) const DashboardHeader(),
-          Expanded(
-            child: Row(
-              children: const [
+      child: (AppResponsive.isDesktop(context))
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const DashboardHeader(),
                 Expanded(
+                  child: Row(
+                    children: const [
+                      Expanded(
+                        child: InputDataCard(),
+                      ),
+                      Expanded(
+                        child: OutputImageCard(),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            )
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Flexible(
                   child: InputDataCard(),
                 ),
-                Expanded(
+                Flexible(
                   child: OutputImageCard(),
                 ),
               ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -22,7 +22,6 @@ class ImageBox extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
-        // color: Colors.amber,
       ),
       constraints: const BoxConstraints(
         maxWidth: 512,
@@ -75,7 +74,10 @@ class ImageDisplayed extends ConsumerWidget {
     }
     //
     else {
-      return Image.memory(tempImage.bytes);
+      return Image.memory(
+        tempImage.bytes,
+        fit: BoxFit.cover,
+      );
     }
   }
 }
