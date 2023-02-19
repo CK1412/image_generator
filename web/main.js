@@ -18,6 +18,12 @@ window.addEventListener('load', function (ev) {
             );
 
             await appRunner.runApp();
+
+            window.setTimeout(() => {
+                // remove loading effect after content is ready
+                let loading = document.querySelector('.loading');
+                loading.remove();
+            }, 200);
         }
     });
 });
