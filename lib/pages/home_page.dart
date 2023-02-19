@@ -35,19 +35,19 @@ class _HomePageState extends ConsumerState<HomePage> {
           key: _scaffoldKey,
           drawer: const SidebarLeft(),
           backgroundColor: context.colors.bgSidebarLeft,
-          body: Row(
-            children: [
-              // Only show sidebar on Desktop
-              if (AppResponsive.isDesktop(context))
-                const Expanded(
-                  child: SidebarLeft(),
-                ),
-              const Expanded(
-                flex: 5,
-                child: DashboardPage(),
-              ),
-            ],
-          ),
+          body: AppResponsive.isDesktop(context)
+              ? Row(
+                  children: const [
+                    Expanded(
+                      child: SidebarLeft(),
+                    ),
+                    Expanded(
+                      flex: 5,
+                      child: DashboardPage(),
+                    ),
+                  ],
+                )
+              : const DashboardPage(),
         ),
       ),
     );

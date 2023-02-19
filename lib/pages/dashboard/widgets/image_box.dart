@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../constants/constants.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../constants/app_texts.dart';
@@ -19,22 +20,20 @@ class ImageBox extends ConsumerWidget {
 
     final isGeneratingImage = dashboardState.isGeneratingImage;
 
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      constraints: const BoxConstraints(
-        maxWidth: 512,
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: AspectRatio(
-        aspectRatio: 1 / 1,
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 500),
-          child: isGeneratingImage
-              ? SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
+    return Align(
+      alignment: Alignment.topCenter,
+      child: LimitedBox(
+        maxHeight: Constants.maxSizeImage,
+        child: AspectRatio(
+          aspectRatio: 1 / 1,
+          child: Container(
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            child: isGeneratingImage
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FractionallySizedBox(
                         widthFactor: 0.2,
@@ -48,9 +47,9 @@ class ImageBox extends ConsumerWidget {
                         textAlign: TextAlign.center,
                       ),
                     ],
-                  ),
-                )
-              : const ImageDisplayed(),
+                  )
+                : const ImageDisplayed(),
+          ),
         ),
       ),
     );
@@ -69,7 +68,7 @@ class ImageDisplayed extends ConsumerWidget {
     if (tempImage == null) {
       return SvgPicture.asset(
         AppIcons.svgPicture,
-        fit: BoxFit.cover,
+        fit: BoxFit.scaleDown,
       );
     }
     //

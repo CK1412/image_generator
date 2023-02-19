@@ -25,7 +25,7 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
       child: (AppResponsive.isDesktop(context))
           ? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const DashboardHeader(),
                 Expanded(
@@ -42,15 +42,10 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ],
             )
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          : ListView(
               children: const [
-                Flexible(
-                  child: InputDataCard(),
-                ),
-                Flexible(
-                  child: OutputImageCard(),
-                ),
+                InputDataCard(),
+                OutputImageCard(),
               ],
             ),
     );

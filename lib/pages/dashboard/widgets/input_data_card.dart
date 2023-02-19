@@ -15,12 +15,13 @@ class InputDataCard extends ConsumerStatefulWidget {
 }
 
 class _InputDataCardState extends ConsumerState<InputDataCard> {
-  late final TextEditingController _textController;
+  late TextEditingController _textController;
 
   @override
   void initState() {
     super.initState();
     _textController = ref.read(dashboardViewModelProvider).textController;
+
     _textController.addListener(() {
       final value = _textController.text;
 
@@ -78,38 +79,29 @@ class _InputDataCardState extends ConsumerState<InputDataCard> {
               maxLines: 5,
             ),
           ),
-          Row(
-            children: [
-              const Spacer(),
-              Expanded(
-                child: CustomFilledButton(
+          Center(
+            child: Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              alignment: WrapAlignment.center,
+              children: [
+                CustomFilledButton(
                   isActive: isClearAllBtnActive,
                   title: AppTexts.btn3,
                   onPressed: _clearAllText,
                 ),
-              ),
-              const SizedBox(
-                width: 10.0,
-              ),
-              Expanded(
-                child: CustomFilledButton(
+                CustomFilledButton(
                   isActive: isGenerateBtnActive,
                   title: AppTexts.btn2,
                   onPressed: _generateImage,
                 ),
-              ),
-              const SizedBox(
-                width: 10.0,
-              ),
-              Expanded(
-                child: CustomFilledButton(
+                CustomFilledButton(
                   isActive: isSaveBtnActive,
                   title: AppTexts.btn4,
                   onPressed: _saveImage,
                 ),
-              ),
-              const Spacer(),
-            ],
+              ],
+            ),
           ),
         ],
       ),

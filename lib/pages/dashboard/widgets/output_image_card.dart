@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../common/app_responsive.dart';
 import '../../../constants/app_texts.dart';
 import '../../../constants/resources/colors.dart';
 import '../../../utils/utils.dart';
@@ -16,36 +17,35 @@ class OutputImageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.maxFinite,
       margin: const EdgeInsets.all(8.0),
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
         color: context.colors.bgDashboardBox,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Column(
+      child: ListView(
+        primary: false,
+        shrinkWrap: AppResponsive.isDesktop(context) ? false : true,
         children: const [
-          Flexible(
-            child: ImageBox(),
-          ),
+          ImageBox(),
           SizedBox(
             height: 20,
           ),
-          ControlBox(),
+          _ControlBox(),
         ],
       ),
     );
   }
 }
 
-class ControlBox extends ConsumerStatefulWidget {
-  const ControlBox({super.key});
+class _ControlBox extends ConsumerStatefulWidget {
+  const _ControlBox();
 
   @override
   ConsumerState createState() => _ControlBoxState();
 }
 
-class _ControlBoxState extends ConsumerState<ControlBox> {
+class _ControlBoxState extends ConsumerState<_ControlBox> {
   @override
   Widget build(BuildContext context) {
     final dashboardState = ref.watch(dashboardViewModelProvider);
@@ -55,26 +55,23 @@ class _ControlBoxState extends ConsumerState<ControlBox> {
     return Visibility(
       visible: tempImage != null,
       replacement: const SizedBox(height: 32),
-      child: SizedBox(
-        width: 512,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            // Download button
-            ControlButton(
-              onTap: _downloadImage,
-              child: const Icon(Icons.download_rounded),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            // Share button
-            ControlButton(
-              onTap: _shareImage,
-              child: const Icon(Icons.share_rounded),
-            )
-          ],
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Download button
+          ControlButton(
+            onTap: _downloadImage,
+            child: const Icon(Icons.download_rounded),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          // Share button
+          ControlButton(
+            onTap: _shareImage,
+            child: const Icon(Icons.share_rounded),
+          )
+        ],
       ),
     );
   }
