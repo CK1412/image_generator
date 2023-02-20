@@ -121,5 +121,7 @@ class _InputDataCardState extends ConsumerState<InputDataCard> {
 
   void _saveImage() {
     ref.read(dashboardViewModelProvider.notifier).saveImageToGallery();
+
+    Utils.showSnackbar(context, text: AppTexts.notification2);
   }
 }

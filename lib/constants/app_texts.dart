@@ -29,4 +29,5 @@ class AppTexts {
 
   // Notification
   static const notification1 = 'Save image successfully.';
+  static const notification2 = 'Save image to gallery successfully.';
 }
