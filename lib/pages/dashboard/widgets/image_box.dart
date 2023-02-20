@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../constants/constants.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../constants/app_texts.dart';
+import '../../../constants/constants.dart';
 import '../../../constants/resources/animations.dart';
 import '../../../constants/resources/icons.dart';
 import '../dashboard_view_model.dart';
