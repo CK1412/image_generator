@@ -28,6 +28,6 @@ class AppTexts {
   static const description2 = 'Image is being created.';
 
   // Notification
-  static const notification1 = 'Save image successfully.';
+  static const notification1 = 'Download image successfully.';
   static const notification2 = 'Save image to gallery successfully.';
 }
