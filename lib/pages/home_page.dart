@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../common/app_responsive.dart';
+import '../common/dismiss_keyboard.dart';
 import '../constants/app_texts.dart';
 import '../constants/resources/colors.dart';
 import '../constants/resources/text_styles.dart';
@@ -27,27 +28,29 @@ class _HomePageState extends ConsumerState<HomePage> {
       ),
     );
 
-    return IgnorePointer(
-      ignoring: ref.watch(dashboardViewModelProvider).isFreezedUI,
-      child: SafeArea(
-        child: Scaffold(
-          appBar: AppResponsive.isDesktop(context) ? null : appBar,
-          key: _scaffoldKey,
-          drawer: const SidebarLeft(),
-          backgroundColor: context.colors.bgSidebarLeft,
-          body: AppResponsive.isDesktop(context)
-              ? Row(
-                  children: const [
-                    Expanded(
-                      child: SidebarLeft(),
-                    ),
-                    Expanded(
-                      flex: 5,
-                      child: DashboardPage(),
-                    ),
-                  ],
-                )
-              : const DashboardPage(),
+    return DismissKeyboard(
+      child: IgnorePointer(
+        ignoring: ref.watch(dashboardViewModelProvider).isFreezedUI,
+        child: SafeArea(
+          child: Scaffold(
+            appBar: AppResponsive.isDesktop(context) ? null : appBar,
+            key: _scaffoldKey,
+            drawer: const SidebarLeft(),
+            backgroundColor: context.colors.bgSidebarLeft,
+            body: AppResponsive.isDesktop(context)
+                ? Row(
+                    children: const [
+                      Expanded(
+                        child: SidebarLeft(),
+                      ),
+                      Expanded(
+                        flex: 5,
+                        child: DashboardPage(),
+                      ),
+                    ],
+                  )
+                : const DashboardPage(),
+          ),
         ),
       ),
     );
