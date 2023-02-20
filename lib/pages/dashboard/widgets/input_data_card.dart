@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../constants/app_texts.dart';
+import '../../../constants/constants.dart';
 import '../../../constants/resources/colors.dart';
 import '../../../constants/resources/text_styles.dart';
 import '../../../utils/utils.dart';
@@ -78,6 +79,7 @@ class _InputDataCardState extends ConsumerState<InputDataCard> {
                 color: context.colors.textOnDashboardBox,
               ),
               maxLines: 5,
+              maxLength: Constants.maxInputTextLength,
             ),
           ),
           Center(
