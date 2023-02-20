@@ -77,9 +77,10 @@ class _ControlBoxState extends ConsumerState<_ControlBox> {
   }
 
   Future<void> _downloadImage() async {
-    await ref.read(dashboardViewModelProvider.notifier).downloadImage();
+    final isSuccessfulDownload =
+        await ref.read(dashboardViewModelProvider.notifier).downloadImage();
 
-    if (context.mounted) {
+    if (context.mounted && isSuccessfulDownload) {
       Utils.showSnackbar(context, text: AppTexts.notification1);
     }
   }

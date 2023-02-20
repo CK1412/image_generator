@@ -13,7 +13,7 @@ class FeatureImpl extends BaseFeature {
   }
 
   @override
-  Future<void> downloadImage({
+  Future<bool> downloadImageAsPng({
     required Uint8List bytes,
     String? fileName,
   }) {
