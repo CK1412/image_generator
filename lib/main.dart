@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -12,7 +14,10 @@ import 'data/providers/hive_client_provider.dart';
 import 'pages/home_page.dart';
 
 Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  if (!kIsWeb) {
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  }
 
   usePathUrlStrategy();
 
@@ -25,6 +30,10 @@ Future main() async {
       child: MainApp(),
     ),
   );
+
+  if (!kIsWeb) {
+    FlutterNativeSplash.remove();
+  }
 }
 
 class MainApp extends ConsumerWidget {
