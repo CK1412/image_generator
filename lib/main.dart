@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -14,7 +15,9 @@ import 'pages/home_page.dart';
 
 Future main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  if (!kIsWeb) {
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  }
 
   usePathUrlStrategy();
 
@@ -28,7 +31,9 @@ Future main() async {
     ),
   );
 
-  FlutterNativeSplash.remove();
+  if (!kIsWeb) {
+    FlutterNativeSplash.remove();
+  }
 }
 
 class MainApp extends ConsumerWidget {
