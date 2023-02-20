@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../constants/app_texts.dart';
 import '../../../constants/resources/colors.dart';
 import '../../../constants/resources/text_styles.dart';
+import '../../../utils/utils.dart';
 import '../dashboard_view_model.dart';
 import 'custom_filled_button.dart';
 
@@ -109,6 +110,8 @@ class _InputDataCardState extends ConsumerState<InputDataCard> {
   }
 
   Future<void> _generateImage() async {
+    Utils.hideKeyboard(context);
+
     await ref.read(dashboardViewModelProvider.notifier).generateImage();
   }
 
