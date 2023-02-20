@@ -51,7 +51,7 @@ class MainApp extends ConsumerWidget {
             false;
 
         return MaterialApp(
-          title: 'image generator',
+          title: 'Image Generator',
           themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
           theme: ThemeData(useMaterial3: true).copyWith(
             visualDensity: VisualDensity.adaptivePlatformDensity,
