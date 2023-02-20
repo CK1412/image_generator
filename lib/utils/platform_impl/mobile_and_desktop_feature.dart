@@ -15,6 +15,7 @@ class FeatureImpl extends BaseFeature {
     String title = 'Great image',
     String fileName = 'image',
   }) async {
+    // Only moblie and ios
     await Share.shareXFiles(
       [XFile.fromData(bytes)],
       subject: title,
