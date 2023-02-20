@@ -70,22 +70,26 @@ class DashboardViewModel extends _$DashboardViewModel {
     setIsGeneratingImage(true);
     logger.d('Generating image...');
 
-    final imageB64 = await apiClient.createImage(
-      textDescription: inputText!,
-    );
+    try {
+      final imageB64 = await apiClient.createImage(
+        textDescription: inputText!,
+      );
 
-    if (imageB64.isNotEmpty) {
-      logger.i('Generate image successfully');
+      if (imageB64.isNotEmpty) {
+        logger.i('Generate image successfully');
 
-      await initImageModel(imageB64);
-      
-      setsIsSaveBtnActive(true);
-    } else {
-      logger.e('Generate image failed.');
+        await initImageModel(imageB64);
+
+        setsIsSaveBtnActive(true);
+      } else {
+        logger.e('Generate image failed.');
+      }
     }
-
-    setIsFreezedUI(false);
-    setIsGeneratingImage(false);
+    //
+    finally {
+      setIsFreezedUI(false);
+      setIsGeneratingImage(false);
+    }
   }
 
   Future<void> initImageModel(String b64Json) async {
@@ -99,29 +103,33 @@ class DashboardViewModel extends _$DashboardViewModel {
   }
 
   Future<void> downloadImage() async {
-    setIsFreezedUI(true);
+    try {
+      setIsFreezedUI(true);
 
-    if (state.tempImage != null) {
-      await Utils.featurePlatform.downloadImage(
-        bytes: state.tempImage!.bytes,
-        fileName: state.tempImage!.name,
-      );
+      if (state.tempImage != null) {
+        await Utils.featurePlatform.downloadImage(
+          bytes: state.tempImage!.bytes,
+          fileName: state.tempImage!.name,
+        );
+      }
+    } finally {
+      setIsFreezedUI(false);
     }
-
-    setIsFreezedUI(false);
   }
 
   Future<void> shareImage() async {
-    setIsFreezedUI(true);
+    try {
+      setIsFreezedUI(true);
 
-    if (state.tempImage != null) {
-      await Utils.featurePlatform.shareImage(
-        bytes: state.tempImage!.bytes,
-        fileName: state.tempImage!.name,
-      );
+      if (state.tempImage != null) {
+        await Utils.featurePlatform.shareImage(
+          bytes: state.tempImage!.bytes,
+          fileName: state.tempImage!.name,
+        );
+      }
+    } finally {
+      setIsFreezedUI(false);
     }
-
-    setIsFreezedUI(false);
   }
 
   void saveImageToGallery() {
