@@ -6,7 +6,7 @@
 
 - Support platform: Web
 - Technology:
-    - Flutter v3.7.0
+    - Flutter v3.7.3
     - Dart v2.17.5
 - API: [DALL-E OpenAI](https://platform.openai.com/docs/api-reference/images/create)
 
