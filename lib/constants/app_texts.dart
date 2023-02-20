@@ -30,4 +30,5 @@ class AppTexts {
   // Notification
   static const notification1 = 'Download image successfully.';
   static const notification2 = 'Save image to gallery successfully.';
+  static const notification3 = 'This feature is not supported on the platform.';
 }

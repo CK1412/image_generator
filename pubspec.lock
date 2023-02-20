@@ -249,6 +249,62 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.4"
+  file_selector:
+    dependency: "direct main"
+    description:
+      name: file_selector
+      sha256: b20af14306e7ce567b7c76076b8c010dcce4bc2f3c4b5137dceb9e4db8ece006
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.2+2"
+  file_selector_ios:
+    dependency: transitive
+    description:
+      name: file_selector_ios
+      sha256: "904091b110b64565566fbb98b334590670de5d7ddd7541be15db22d4e64203eb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.0+2"
+  file_selector_linux:
+    dependency: transitive
+    description:
+      name: file_selector_linux
+      sha256: "30edefcdb76be8f4a2dadf57554b42a2791c06cdbc2db62894a918ea36c37cff"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.1"
+  file_selector_macos:
+    dependency: transitive
+    description:
+      name: file_selector_macos
+      sha256: "6fd5242e12b6b0b0d2e59e779a7eafaeaa374687c84e8ad1e948e5dad8941109"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.0+4"
+  file_selector_platform_interface:
+    dependency: transitive
+    description:
+      name: file_selector_platform_interface
+      sha256: "17cdfe3d13a7d3e29e3d3978577ce840fcf94497d7de51bdea378abf9a34fc2c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.0"
+  file_selector_web:
+    dependency: transitive
+    description:
+      name: file_selector_web
+      sha256: "0175186c42ef8d622c7cf214e46294f8dbe81ae32ae4407896c773c8f7dc930b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.0+2"
+  file_selector_windows:
+    dependency: transitive
+    description:
+      name: file_selector_windows
+      sha256: "1cfeddc127f78f3f96803ad7c3d3ce500791cbefb15a7b19b9ee71e7b92ff4b4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.1+4"
   fixnum:
     dependency: transitive
     description:
@@ -425,7 +481,7 @@ packages:
     source: hosted
     version: "4.0.2"
   image:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: image
       sha256: "483a389d6ccb292b570c31b3a193779b1b0178e7eb571986d9a49904b6861227"

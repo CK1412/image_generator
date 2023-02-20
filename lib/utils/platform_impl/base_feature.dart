@@ -7,7 +7,7 @@ abstract class BaseFeature {
     String fileName = 'image',
   });
 
-  Future<void> downloadImage({
+  Future<bool> downloadImageAsPng({
     required Uint8List bytes,
     String? fileName,
   });

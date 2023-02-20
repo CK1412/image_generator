@@ -102,15 +102,17 @@ class DashboardViewModel extends _$DashboardViewModel {
     setTempImage(imgData);
   }
 
-  Future<void> downloadImage() async {
+  Future<bool> downloadImage() async {
     try {
       setIsFreezedUI(true);
 
       if (state.tempImage != null) {
-        await Utils.featurePlatform.downloadImage(
+        return await Utils.featurePlatform.downloadImageAsPng(
           bytes: state.tempImage!.bytes,
           fileName: state.tempImage!.name,
         );
+      } else {
+        return false;
       }
     } finally {
       setIsFreezedUI(false);

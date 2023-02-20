@@ -29,7 +29,7 @@ class FeatureImpl extends BaseFeature {
   }
 
   @override
-  Future<void> downloadImage({
+  Future<bool> downloadImageAsPng({
     required Uint8List bytes,
     String? fileName,
   }) async {
@@ -37,5 +37,7 @@ class FeatureImpl extends BaseFeature {
       uInt8List: bytes,
       name: fileName,
     );
+
+    return true;
   }
 }

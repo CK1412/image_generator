@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -77,14 +80,21 @@ class _ControlBoxState extends ConsumerState<_ControlBox> {
   }
 
   Future<void> _downloadImage() async {
-    await ref.read(dashboardViewModelProvider.notifier).downloadImage();
+    final isSuccessfulDownload =
+        await ref.read(dashboardViewModelProvider.notifier).downloadImage();
 
-    if (context.mounted) {
+    if (context.mounted && isSuccessfulDownload) {
       Utils.showSnackbar(context, text: AppTexts.notification1);
     }
   }
 
   Future<void> _shareImage() async {
-    await ref.read(dashboardViewModelProvider.notifier).shareImage();
+    if (!kIsWeb && !Platform.isAndroid && !Platform.isIOS) {
+      if (context.mounted) {
+        Utils.showSnackbar(context, text: AppTexts.notification3);
+      }
+    } else {
+      await ref.read(dashboardViewModelProvider.notifier).shareImage();
+    }
   }
 }

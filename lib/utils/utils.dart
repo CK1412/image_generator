@@ -4,13 +4,11 @@ import 'package:http/http.dart' as http;
 
 import '../common/warning_dialog.dart';
 import 'platform_impl/stub_feature.dart'
-    if (dart.library.io) 'platform_impl/mobile_feature.dart'
+    if (dart.library.io) 'platform_impl/mobile_and_desktop_feature.dart'
     if (dart.library.html) 'platform_impl/web_feature.dart';
 
 class Utils {
   Utils._();
-
-  static bool get isWeb => kIsWeb;
 
   static final FeatureImpl _feature = FeatureImpl();
 
@@ -26,7 +24,7 @@ class Utils {
     bool onlyMobile = true,
     required String text,
   }) async {
-    if ((onlyMobile && !isWeb) || !onlyMobile) {
+    if ((onlyMobile && !kIsWeb) || !onlyMobile) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(text),
