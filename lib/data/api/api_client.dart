@@ -20,7 +20,7 @@ class ApiClient {
     String size = '512x512',
   }) async {
     final response = await client.post(
-      Uri.parse(apiConfig.apiUrl),
+      Uri.parse('${apiConfig.apiUrl}/generations'),
       headers: {
         'Authorization': 'Bearer ${apiConfig.apiKey}',
         'Content-Type': 'application/json',
