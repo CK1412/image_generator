@@ -60,6 +60,22 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        development {
+            dimension "default"
+            resValue "string", "app_name", "(Dev) Image Generator"
+            applicationIdSuffix ".develop"
+        }
+
+        production {
+            dimension "default"
+            resValue "string", "app_name", "Image Generator"
+        }
+    }
+
 }
 
 flutter {

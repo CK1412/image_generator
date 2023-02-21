@@ -1,43 +1,21 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'common/my_custom_scroll_behavior.dart';
 import 'constants/resources/colors.dart';
 import 'data/databases/hive/hive_boxes.dart';
-import 'data/databases/hive/hive_client.dart';
 import 'data/providers/hive_client_provider.dart';
+import 'main/app_flavor.dart';
 import 'pages/home_page.dart';
 
-Future main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  if (!kIsWeb) {
-    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  }
+class App extends ConsumerWidget {
+  const App({
+    super.key,
+    required this.appFlavor,
+  });
 
-  usePathUrlStrategy();
-
-  await dotenv.load(fileName: '.env');
-
-  await HiveClient.init();
-
-  runApp(
-    const ProviderScope(
-      child: MainApp(),
-    ),
-  );
-
-  if (!kIsWeb) {
-    FlutterNativeSplash.remove();
-  }
-}
-
-class MainApp extends ConsumerWidget {
-  const MainApp({super.key});
+  final AppFlavor appFlavor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,6 +29,7 @@ class MainApp extends ConsumerWidget {
             false;
 
         return MaterialApp(
+          debugShowCheckedModeBanner: !appFlavor.appFlavorType.isProduction,
           title: 'Image Generator',
           themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
           theme: ThemeData(useMaterial3: true).copyWith(
