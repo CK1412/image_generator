@@ -36,7 +36,7 @@
 
   <!-- Preloader -->
   <div class="content">
-    <div class="loading">
+    <div id="preloader" class="loading">
       <p>loading</p>
       <span></span>
     </div>
@@ -62,6 +62,7 @@
 
     window.addEventListener('load', function (ev) {
       let useHtml = true;
+      let preloader = document.getElementById('preloader');
 
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
@@ -82,8 +83,7 @@
 
           window.setTimeout(() => {
             // remove loading effect after content is ready
-            let loading = document.querySelector('.loading');
-            loading.remove();
+            preloader.style.display = 'none'
           }, 200);
         }
       });
