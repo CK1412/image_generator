@@ -151,6 +151,6 @@ class DashboardViewModel extends _$DashboardViewModel {
       tempImage: null,
     );
 
-    setInputText('');
+    state.textController.clear();
   }
 }
