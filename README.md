@@ -1,4 +1,4 @@
-# image_generator
+# Image Generator
 
 **Image Generator** that allows create realistic images and art from a description in natural language.
 
@@ -26,4 +26,8 @@ API_KEY=[YOUR_API]
 
 - Run on Chrome: 
     - Run command: `flutter run -d chrome --web-browser-flag "--disable-web-security"`.
+
+## License
+
+[MIT License](LICENSE)
     
