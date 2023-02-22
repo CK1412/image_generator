@@ -10,6 +10,11 @@ $c-02: #a6dcee;
 
 $font-01: "Oxygen", sans-serif;
 
+$aboutIcon: "icons/astronaut.svg";
+$githubIcon: "icons/github-mark-white.svg";
+$facebookIcon: "icons/facebook-white.svg";
+$linkedinIcon: "https://rafaelavlucas.github.io/assets/codepen/linkedin.svg";
+
 .content {
     width: 100%;
     height: 100vh;
@@ -171,7 +176,7 @@ $font-01: "Oxygen", sans-serif;
         width: $size * 1.2;
         height: $size * 1.2;
         z-index: 9;
-        background-image: url(web/assets/icons/astronaut.svg);
+        background-image: url($aboutIcon);
         background-position: center;
         background-size: 80%;
         background-repeat: no-repeat;
@@ -203,7 +208,7 @@ $font-01: "Oxygen", sans-serif;
             transition: all 0.8s ease;
 
             .icon {
-                background-image: url(web/assets/icons/github-mark-white.svg);
+                background-image: url($githubIcon);
             }
         }
 
@@ -211,7 +216,7 @@ $font-01: "Oxygen", sans-serif;
             transition: all 0.3s ease;
 
             .icon {
-                background-image: url(web/assets/icons/facebook-white.svg);
+                background-image: url($facebookIcon);
             }
         }
 
@@ -219,7 +224,7 @@ $font-01: "Oxygen", sans-serif;
             transition: all 0.8s ease;
 
             .icon {
-                background-image: url(https://rafaelavlucas.github.io/assets/codepen/linkedin.svg);
+                background-image: url($linkedinIcon);
             }
         }
     }
