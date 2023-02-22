@@ -25,7 +25,7 @@ dependencies:
   riverpod_annotation: ^1.1.1
   
   flutter_dotenv: ^5.0.2
-  
+  logger: ^1.1.0
   
   hive: ^2.2.3
   hive_flutter: ^1.1.0
@@ -39,8 +39,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-
-  logger: ^1.1.0
   
   freezed: ^2.3.2
   build_runner: ^2.3.3
