@@ -1,5 +1,5 @@
 name: image_generator
-description: A new Flutter project.
+description: Cross-platform image generator using OpenAI and Flutter.
 publish_to: 'none'
 version: 0.1.0
 

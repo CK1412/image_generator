@@ -6,7 +6,7 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="description" content="Cross-platform image generator using OpenAI and Flutter">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -32,8 +32,6 @@
 </head>
 
 <body>
-  <script src="main.js"></script>
-
   <!-- Preloader -->
   <div class="content">
     <div id="preloader" class="loading">
@@ -82,7 +80,7 @@
           await appRunner.runApp();
 
           window.setTimeout(() => {
-            // remove loading effect after content is ready
+            // hide loading effect after content is ready
             preloader.style.display = 'none'
           }, 200);
         }

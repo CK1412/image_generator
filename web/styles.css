@@ -142,7 +142,7 @@ body {
   width: 48px;
   height: 48px;
   z-index: 9;
-  background-image: url(web/assets/icons/astronaut.svg);
+  background-image: url("icons/astronaut.svg");
   background-position: center;
   background-size: 80%;
   background-repeat: no-repeat;
@@ -172,19 +172,19 @@ body {
   transition: all 0.8s ease;
 }
 .about .social.github .icon {
-  background-image: url(web/assets/icons/github-mark-white.svg);
+  background-image: url("icons/github-mark-white.svg");
 }
 .about .social.facebook {
   transition: all 0.3s ease;
 }
 .about .social.facebook .icon {
-  background-image: url(web/assets/icons/facebook-white.svg);
+  background-image: url("icons/facebook-white.svg");
 }
 .about .social.linkedin {
   transition: all 0.8s ease;
 }
 .about .social.linkedin .icon {
-  background-image: url(https://rafaelavlucas.github.io/assets/codepen/linkedin.svg);
+  background-image: url("icons/linkedin.svg");
 }
 .about:hover {
   width: 105px;
