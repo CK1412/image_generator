@@ -184,7 +184,7 @@ body {
   transition: all 0.8s ease;
 }
 .about .social.linkedin .icon {
-  background-image: url("https://rafaelavlucas.github.io/assets/codepen/linkedin.svg");
+  background-image: url("icons/linkedin.svg");
 }
 .about:hover {
   width: 105px;
