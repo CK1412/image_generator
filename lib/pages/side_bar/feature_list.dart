@@ -51,9 +51,9 @@ class _FeatureListState extends ConsumerState<FeatureList> {
                 false;
 
             final title =
-                isDarkMode ? AppTexts.titleListTile2 : AppTexts.titleListTile3;
+                isDarkMode ? AppTexts.titleListTile3 : AppTexts.titleListTile2;
 
-            final iconData = isDarkMode ? Icons.dark_mode : Icons.light_mode;
+            final iconData = isDarkMode ? Icons.light_mode : Icons.dark_mode;
 
             return DrawerListTile(
               iconData: iconData,
