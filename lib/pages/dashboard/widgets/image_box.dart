@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../constants/resources/colors.dart';
+import '../../../constants/resources/text_styles.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../constants/app_texts.dart';
@@ -42,9 +44,12 @@ class ImageBox extends ConsumerWidget {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      const Text(
+                      Text(
                         AppTexts.description2,
                         textAlign: TextAlign.center,
+                        style: AppTextStyles.textRegular14.copyWith(
+                          color: context.colors.textOnDashboardBox,
+                        ),
                       ),
                     ],
                   )
