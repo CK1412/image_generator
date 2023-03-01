@@ -17,10 +17,10 @@ jobs:
     needs: analyze_code_before_merge
 
     steps:
-      - run-name: Check out repository
+      - name: Check out repository
         uses: actions/checkout@v2
 
-      - run-name: Install Flutter environment
+      - name: Install Flutter environment
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.7.3'
@@ -28,7 +28,7 @@ jobs:
 
       - run: echo "This API_KEY $API_KEY is taken from secret repository on github."
 
-      - run-name: build web and store [deploy-branch] branch
+      - name: build web and store [deploy-branch] branch
         uses: bluefireteam/flutter-gh-pages@v7
         with:
           webRenderer: html

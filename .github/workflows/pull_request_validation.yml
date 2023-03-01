@@ -6,20 +6,20 @@ jobs:
   analyze_code_before_merge:
     runs-on: ubuntu-latest
     steps:
-      - run-name: Check out repository
+      - name: Check out repository
         uses: actions/checkout@v3
 
-      - run-name: Install Flutter environment
+      - name: Install Flutter environment
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.7.3'
           chanel: 'stable'
 
-      - run-name: Installs the dependencies
+      - name: Installs the dependencies
         run: flutter pub get
 
-      - run-name: Run code-generators
+      - name: Run code-generators
         run: flutter packages pub run build_runner build --delete-conflicting-outputs
       
-      - run-name: Analyze the code and check for mistakes
+      - name: Analyze the code and check for mistakes
         run: flutter analyze
