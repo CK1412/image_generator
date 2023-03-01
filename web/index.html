@@ -1,59 +1,94 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="description" content="Cross-platform image generator using OpenAI and Flutter">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="image_generator">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" href="favicon.ico" sizes="any">
 
-  <title>image_generator</title>
+  <title>Image Generator</title>
   <link rel="manifest" href="manifest.json">
 
   <script>
     // The value below is injected by flutter build, do not touch.
     var serviceWorkerVersion = null;
   </script>
+
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
+
+  <!-- Preloader -->
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+  <!-- Preloader -->
+  <div class="content">
+    <div id="preloader" class="loading">
+      <p>loading</p>
+      <span></span>
+    </div>
+  </div>
+  <!-- End Preloader -->
+
+  <!-- About author-->
+  <div class="about">
+    <a class="bg_links social github" href="https://github.com/CK1412" target="_blank">
+      <span class="icon"></span>
+    </a>
+    <a class="bg_links social facebook" href="https://www.facebook.com/profile.php?id=100082532019049" target="_blank">
+      <span class="icon"></span>
+    </a>
+    <div class="bg_links social linkedin">
+      <span class="icon"></span>
+    </div>
+    <a class="bg_links logo"></a>
+  </div>
+  <!-- end about author -->
+
   <script>
-    window.addEventListener('load', function(ev) {
+
+    window.addEventListener('load', function (ev) {
+      let useHtml = true;
+      let preloader = document.getElementById('preloader');
+
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
-            appRunner.runApp();
-          });
+        onEntrypointLoaded: async function (engineInitializer) {
+          // Run-time engine configuration
+          let config = {
+            renderer: useHtml ? "html" : "canvaskit",
+          }
+
+          let appRunner = await engineInitializer.initializeEngine(
+            config
+          );
+
+          await appRunner.runApp();
+
+          window.setTimeout(() => {
+            // hide loading effect after content is ready
+            preloader.style.display = 'none'
+          }, 200);
         }
       });
     });
+
   </script>
 </body>
+
 </html>
