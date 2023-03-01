@@ -21,10 +21,17 @@ void mainCommon(AppFlavor appFlavor) async {
 
     usePathUrlStrategy();
 
-    await dotenv.load(fileName: '.env');
+    String apiKey = '';
+
+    if (appFlavor.appFlavorType.isProduction) {
+      apiKey = const String.fromEnvironment('API_KEY');
+    } else {
+      await dotenv.load(fileName: '.env');
+      apiKey = dotenv.env['API_KEY']!;
+    }
 
     appFlavor = appFlavor.copyWith(
-      apiConfig: appFlavor.apiConfig.copyWith(apiKey: dotenv.env['API_KEY']!),
+      apiConfig: appFlavor.apiConfig.copyWith(apiKey: apiKey),
     );
 
     await HiveClient.init();
