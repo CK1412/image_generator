@@ -20,10 +20,11 @@ class ApiClient {
     String size = '512x512',
   }) async {
     final response = await client.post(
-      Uri.parse('${apiConfig.apiUrl}/generations'),
+      Uri.parse(apiConfig.apiUrl),
       headers: {
         'Authorization': 'Bearer ${apiConfig.apiKey}',
         'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
       },
       body: jsonEncode({
         'prompt': textDescription,

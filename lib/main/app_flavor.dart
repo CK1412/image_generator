@@ -33,7 +33,7 @@ class AppFlavorValue {
   static final AppFlavor development = AppFlavor(
     appFlavorType: AppFlavorType.development,
     apiConfig: ApiConfig(
-      baseUrl: 'https://api.openai.com/v1/images',
+      baseUrl: 'https://api.openai.com/v1/images/generations',
       apiKey: '',
     ),
   );
@@ -41,7 +41,8 @@ class AppFlavorValue {
   static final AppFlavor production = AppFlavor(
     appFlavorType: AppFlavorType.production,
     apiConfig: ApiConfig(
-      baseUrl: 'https://api.openai.com/v1/images',
+      baseUrl:
+          'https://cors-anywhere.herokuapp.com/https://api.openai.com/v1/images/generations',
       apiKey: '',
     ),
   );
