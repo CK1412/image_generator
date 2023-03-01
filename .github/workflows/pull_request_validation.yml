@@ -5,9 +5,10 @@ on: pull_request
 jobs:
   analyze_code_before_merge:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Install Flutter environment
         uses: subosito/flutter-action@v2
