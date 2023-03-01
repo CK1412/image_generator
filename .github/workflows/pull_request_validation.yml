@@ -1,6 +1,8 @@
 # This workflow analyses and tests every pull request.
 name: Pull Request Validation
-on: pull_request
+
+on: 
+  pull_request:
 
 jobs:
   analyze_code:
@@ -13,7 +15,6 @@ jobs:
       - name: Install Flutter environment
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.3'
           chanel: 'stable'
 
       - name: Installs the dependencies
