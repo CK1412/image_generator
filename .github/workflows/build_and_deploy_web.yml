@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     # This job only runs when [analyze-code-before-merge] job to complete.
-    needs: analyze-code-before-merge
+    needs: analyze_code_before_merge
 
     steps:
       - name: Check out repository
