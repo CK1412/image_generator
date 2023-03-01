@@ -5,6 +5,11 @@ name: Build and Deploy Web
 on:
   push:
     branches: [main]
+    
+  workflow_run:
+    workflows: [pull_request_validation]
+    types:
+      - completed
 
 env:
   API_KEY: ${{ secrets.API_KEY }}
@@ -12,9 +17,6 @@ env:
 jobs:
   build-web:
     runs-on: ubuntu-latest
-
-    # This job only runs when [analyze-code-before-merge] job to complete.
-    needs: analyze_code_before_merge
 
     steps:
       - name: Check out repository
