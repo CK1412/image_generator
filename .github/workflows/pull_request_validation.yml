@@ -23,4 +23,3 @@ jobs:
       
       - name: Analyze the code and check for mistakes
       - run: flutter analyze
-      
