@@ -1,26 +1,22 @@
 # This workflow builds, analyses and tests every pull request.
 name: Pull Request Validation
 on: pull_request
-
 jobs:
-  analyze-code-before-merge:
+  analyze:
     runs-on: ubuntu-latest
     steps:
+      # This step checks out a copy of your repository.
       - name: Check out repository
-        uses: actions/checkout@v3
-
-      - name: Install Flutter environment
+        uses: actions/checkout@v2
+      # Install Flutter environment
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.3'
+          flutter-version: '3.7.0'
           chanel: 'stable'
-
-      - name: Installs the dependencies
+      # Installs the dependencies of the app
       - run: flutter pub get
-
-      - name: Run code-generators
+      # Run code-generators
       - run: flutter packages pub run build_runner build --delete-conflicting-outputs
-      
-      - name: Analyze the code and check for mistakes
+      # Analyze the code and check for mistakes
       - run: flutter analyze
       
