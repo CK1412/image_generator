@@ -12,8 +12,8 @@ flutter_native_splash:
     # App icon background color.
     icon_background_color: "#212125"
 
-  # The android, ios and web parameters can be used to disable generating a splash screen on a given
-  # platform.
+  # The android, ios and web parameters can be used to disable generating a splash screen 
+  # on a given platform.
   android: true
   ios: true
   web: false

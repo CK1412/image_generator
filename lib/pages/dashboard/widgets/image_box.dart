@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../constants/resources/colors.dart';
-import '../../../constants/resources/text_styles.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../constants/app_texts.dart';
 import '../../../constants/constants.dart';
 import '../../../constants/resources/animations.dart';
+import '../../../constants/resources/colors.dart';
 import '../../../constants/resources/icons.dart';
+import '../../../constants/resources/text_styles.dart';
 import '../dashboard_view_model.dart';
 
 class ImageBox extends ConsumerWidget {
