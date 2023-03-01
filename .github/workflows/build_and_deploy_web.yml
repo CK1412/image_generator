@@ -6,15 +6,17 @@ on:
   push:
     branches: [main]
 
+  workflow_run:
+    workflows: [pull_request_validation]
+    types:
+      - completed
+
 env:
   API_KEY: ${{ secrets.API_KEY }}
 
 jobs:
-  build-web:
+  build_web:
     runs-on: ubuntu-latest
-
-    # This job only runs when [analyze-code-before-merge] job to complete.
-    needs: analyze_code_before_merge
 
     steps:
       - name: Check out repository
@@ -23,7 +25,6 @@ jobs:
       - name: Install Flutter environment
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.3'
           chanel: 'stable'
 
       - run: echo "This API_KEY $API_KEY is taken from secret repository on github."
