@@ -3,7 +3,7 @@ name: Pull Request Validation
 on: pull_request
 
 jobs:
-  analyze_code_before_merge:
+  analyze_code:
     runs-on: ubuntu-latest
 
     steps:
