@@ -26,8 +26,8 @@ jobs:
       - name: Create .env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
+          envkey_API_KEY: xxxxxxxxx
           file_name: .env
-          envkey_API_KEY: 'xxxxxxxxx'
 
       - run: echo "API_KEY is taken from secret repository on github."
 
