@@ -3,6 +3,8 @@ name: Pull Request Validation
 
 on: 
   pull_request:
+    branches-ignore: 
+      - deploy-web
 
 jobs:
   analyze_code:
@@ -15,6 +17,7 @@ jobs:
       - name: Install Flutter environment
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.7.x' 
           chanel: 'stable'
 
       - name: Installs the dependencies
