@@ -30,6 +30,12 @@ jobs:
 
       - run: echo "This API_KEY $API_KEY is taken from secret repository on github."
 
+      - name: Create .env file
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          file_name: .env
+          envkey_API_KEY: $API_KEY
+
       - name: Installs the dependencies
         run: flutter pub get
 
@@ -42,4 +48,4 @@ jobs:
           webRenderer: html
           targetBranch: deploy-web
           baseHref: /image_generator/
-          customArgs: --target lib/main/main_production.dart --dart-define=API_KEY=$API_KEY
+          customArgs: --target lib/main/main_production.dart

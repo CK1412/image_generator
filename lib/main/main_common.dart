@@ -21,14 +21,9 @@ void mainCommon(AppFlavor appFlavor) async {
 
     usePathUrlStrategy();
 
-    String apiKey = '';
+    await dotenv.load(fileName: '.env');
 
-    if (appFlavor.appFlavorType.isProduction) {
-      apiKey = const String.fromEnvironment('API_KEY');
-    } else {
-      await dotenv.load(fileName: '.env');
-      apiKey = dotenv.env['API_KEY']!;
-    }
+    String apiKey = dotenv.env['API_KEY']!;
 
     appFlavor = appFlavor.copyWith(
       apiConfig: appFlavor.apiConfig.copyWith(apiKey: apiKey),
