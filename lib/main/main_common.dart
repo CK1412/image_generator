@@ -15,7 +15,7 @@ import 'app_flavor.dart';
 void mainCommon(AppFlavor appFlavor) async {
   Future<void> startApp() async {
     WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-    
+
     if (!kIsWeb) {
       FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     }
