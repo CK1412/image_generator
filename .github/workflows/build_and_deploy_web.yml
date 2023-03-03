@@ -1,46 +1,46 @@
-# This workflow build and deploy Web app on Gihub Pages.
-# Build folder will store on the [deploy-web] branch. This branch is created completely automatically.
-name: Build and Deploy Web
+# # This workflow build and deploy Web app on Gihub Pages.
+# # Build folder will store on the [deploy-web] branch. This branch is created completely automatically.
+# name: Build and Deploy Web
 
-on:
-  push:
-    branches: [main]
+# on:
+#   push:
+#     branches: [main]
 
-env:
-  API_KEY: ${{ secrets.API_KEY }}
+# env:
+#   API_KEY: ${{ secrets.API_KEY }}
 
-jobs:
-  build_web:
-    runs-on: ubuntu-latest
+# jobs:
+#   build_web:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
+#     steps:
+#       - name: Check out repository
+#         uses: actions/checkout@v3
 
-      - name: Install Flutter environment
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.7.x' 
-          channel: 'stable'
+#       - name: Install Flutter environment
+#         uses: subosito/flutter-action@v2
+#         with:
+#           flutter-version: '3.7.x' 
+#           channel: 'stable'
 
-      - name: Create .env file
-        uses: SpicyPizza/create-envfile@v1.3
-        with:
-          envkey_API_KEY: xxxxxxxxx
-          file_name: .env
+#       - name: Create .env file
+#         uses: SpicyPizza/create-envfile@v1.3
+#         with:
+#           envkey_API_KEY: xxxxxxxxx
+#           file_name: .env
 
-      - run: echo "API_KEY is taken from secret repository on github."
+#       - run: echo "API_KEY is taken from secret repository on github."
 
-      - name: Installs the dependencies
-        run: flutter pub get
+#       - name: Installs the dependencies
+#         run: flutter pub get
 
-      - name: Run code-generators
-        run: flutter packages pub run build_runner build --delete-conflicting-outputs
+#       - name: Run code-generators
+#         run: flutter packages pub run build_runner build --delete-conflicting-outputs
 
-      - name: Build web and store [deploy-branch] branch
-        uses: bluefireteam/flutter-gh-pages@v7
-        with:
-          webRenderer: html
-          targetBranch: deploy-web
-          baseHref: /image_generator/
-          customArgs: --target lib/main/main_production.dart
+#       - name: Build web and store [deploy-branch] branch
+#         uses: bluefireteam/flutter-gh-pages@v7
+#         with:
+#           webRenderer: html
+#           targetBranch: deploy-web
+#           baseHref: /image_generator/
+#           customArgs: --target lib/main/main_production.dart
