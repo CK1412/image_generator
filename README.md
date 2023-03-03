@@ -1,6 +1,15 @@
 # Image Generator
 
+## Introduce
+
 **Image Generator** that allows create realistic images and art from a description in natural language.
+
+- Available functions:
+    - Create images from description text.
+    - Download and share image.
+    - Save image in gallery.
+    - Dark/Light mode.
+
 
 Image Generator is live at [Here](https://ck1412.github.io/image_generator/)
 
@@ -58,4 +67,9 @@ https://github.com/CK1412/image_generator
 ## License
 
 [MIT License](LICENSE)
-    
+
+## Troubleshooting
+
+### Image not showing
+
+- This is a [CORS error](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors). To fix it go to [CORS-ANYWHERE](https://cors-anywhere.herokuapp.com/corsdemo).
