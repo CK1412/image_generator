@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base href="./">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Cross-platform image generator using OpenAI and Flutter">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="image_generator">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+
+  <title>Image Generator</title>
+  <link rel="manifest" href="manifest.json">
+
+  <script>
+    // The value below is injected by flutter build, do not touch.
+    var serviceWorkerVersion = '979929698';
+  </script>
+
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="flutter.js" defer></script>
+
+  <script src="main.dart.js" defer></script>
+
+  <!-- Preloader -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div class="content">
+    <div id="preloader" class="loading">
+      <p>loading</p>
+      <span></span>
+    </div>
+  </div>
+  <!-- End Preloader -->
+
+  <!-- About author-->
+  <div class="about">
+    <a class="bg_links social github" href="https://github.com/CK1412" target="_blank">
+      <span class="icon"></span>
+    </a>
+    <a class="bg_links social facebook" href="https://www.facebook.com/profile.php?id=100082532019049" target="_blank">
+      <span class="icon"></span>
+    </a>
+    <div class="bg_links social linkedin">
+      <span class="icon"></span>
+    </div>
+    <a class="bg_links logo"></a>
+  </div>
+  <!-- end about author -->
+
+  <script>
+
+    window.addEventListener('load', function (ev) {
+      let useHtml = true;
+      let preloader = document.getElementById('preloader');
+
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: async function (engineInitializer) {
+          // Run-time engine configuration
+          let config = {
+            renderer: useHtml ? "html" : "canvaskit",
+          }
+
+          let appRunner = await engineInitializer.initializeEngine(
+            config
+          );
+
+          await appRunner.runApp();
+
+          window.setTimeout(() => {
+            // hide loading effect after content is ready
+            preloader.style.display = 'none'
+          }, 200);
+        }
+      });
+    });
+
+  </script>
+</body>
+
+</html>
