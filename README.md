@@ -64,6 +64,8 @@ https://github.com/CK1412/image_generator
 
 - [Build and release an Windows App](https://docs.flutter.dev/deployment/windows)
 
+> Note: **Do not** use environment variables in .env file when building web. 
+
 ## License
 
 [MIT License](LICENSE)
@@ -73,3 +75,7 @@ https://github.com/CK1412/image_generator
 ### Image not showing
 
 - This is a [CORS error](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors). To fix it go to [CORS-ANYWHERE](https://cors-anywhere.herokuapp.com/corsdemo).
+
+### Do not show the interface when deploying the web
+
+- The site will not display the content because the **API_KEY** value is set in the `.env` file. So don't use the .env file but put the **API_KEY** value directly in the code then proceed to build the web.
