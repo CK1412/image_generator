@@ -10,11 +10,6 @@
     - Save image in gallery.
     - Dark/Light mode.
 
-
-Image Generator is live at [Here](https://ck1412.github.io/image_generator/)
-
-**Note**: Since the Dall E API charges on-demand, image generation will not be available in these builds. Use your API_KEY and it should work fine.
-
 ## Project Information
 
 - Support platform: Web, Windows, Android.
